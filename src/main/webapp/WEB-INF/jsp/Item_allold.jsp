@@ -7,11 +7,8 @@
       <div class="panel panel-primary">
         <div class="panel-heading"> ${item.name} </div>
         <div class="panel-body">
-        <p>Price : ${item.price}  </p>
+        <p>Price : ${item.price}  </p> 
         </div>
-        <div class="panel-footer"> <button type="button" class="btn btn-primary btn-md"
-           onClick="location.href='/products/${item.id} ' ">Browse</button></div>
-      </div>
     </div>
     </c:forEach>
   </div>

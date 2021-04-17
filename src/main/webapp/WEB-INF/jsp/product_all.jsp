@@ -2,15 +2,16 @@
 
 <div class="container">    
   <div class="row">
-  <c:forEach items="${items}" var="item">
+  <c:forEach items="${products}" var="product">
     <div class="col-sm-4">
       <div class="panel panel-primary">
-        <div class="panel-heading"> ${item.name} </div>
+        <div class="panel-heading"> ${product.name} </div>
         <div class="panel-body">
-        <p>Price : ${item.price}  </p>
+        <p>Price : ${product.price}  </p>
+		<p>Seller :  ${product.seller} </p>  
         </div>
         <div class="panel-footer"> <button type="button" class="btn btn-primary btn-md"
-           onClick="location.href='/products/${item.id} ' ">Browse</button></div>
+           onClick="location.href='/products/${product.id} ' ">Browse</button></div>
       </div>
     </div>
     </c:forEach>

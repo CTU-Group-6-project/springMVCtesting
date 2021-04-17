@@ -1,4 +1,4 @@
-package com.group6.jBravo;
+package com.group6.jBravoApplication;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
