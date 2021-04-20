@@ -7,7 +7,7 @@
       <div class="panel panel-primary">
         <div class="panel-heading"> ${item.name} </div>
         <div class="panel-body">
-        <p>Description : $item.description}  </p>
+        <p>Description : ${item.description}  </p>
         <p>Price : ${item.price}  </p> 
         </div>
         <div class="panel-footer"> <button type="button" class="btn btn-primary btn-md"
