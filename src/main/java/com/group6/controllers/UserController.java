@@ -1,9 +1,13 @@
 package com.group6.controllers;
 
+
+
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -23,8 +27,13 @@ public class UserController {
 	}
 	
 	@PostMapping("/login")
-	public String processLogin(@ModelAttribute("user") User user, Model model) {
-		
+	public String processLogin(@Valid User user, Errors errors,   Model model) {
+		System.out.println("user.name=" + user.getUsername());
+		if (errors.hasErrors()) {
+			System.out.println("found error in input");
+			return "user_login";
+		}
+		System.out.println("no input errors");
 		return "home";
 	}
 }

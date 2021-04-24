@@ -16,7 +16,7 @@
 				  <form:input path="username" type="text" class="form-control" placeholder="username or email"/>
 				  
 				</div>
-
+			<form:errors path="username" cssClasss="Text-danger"/>
 				<div style="margin-bottom: 25px" class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span> 
 						
 				  <form:input path="password" type="password" class="form-control" placeholder="password"/>
