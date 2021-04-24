@@ -6,9 +6,9 @@ import javax.validation.constraints.Size;
 
 public class User {
 	
-//	@NotBlank(message="UserName can not be Empty")
+	@NotBlank(message="UserName can not be Empty")
 //	@NotNull(message="username cannot be null")
-	@Size(min = 4, max = 15)
+//	@Size(min = 4, max = 15)
 	private String username;
 	
 //	@NotNull

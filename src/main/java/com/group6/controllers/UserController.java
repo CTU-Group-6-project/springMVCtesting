@@ -34,6 +34,6 @@ public class UserController {
 			return "user_login";
 		}
 		System.out.println("no input errors");
-		return "home";
+		return "redirect:/";
 	}
 }
