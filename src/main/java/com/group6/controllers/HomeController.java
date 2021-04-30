@@ -10,6 +10,13 @@ public class HomeController {
 	public String showHomePage() {
 		System.out.println("In Home page");
 		
-		return "home";
+		return "index";
+	}
+
+	@GetMapping("/index")
+	public String showIndexPage() {
+		System.out.println("In Home page");
+		
+		return "index";
 	}
 }

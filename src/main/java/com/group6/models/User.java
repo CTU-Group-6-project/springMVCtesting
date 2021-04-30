@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 
 public class User {
 	
-	@NotBlank(message="UserName can not be Empty")
+//	@NotBlank(message="UserName can not be Empty")
 //	@NotNull(message="username cannot be null")
 //	@Size(min = 4, max = 15)
 	private String username;
@@ -15,6 +15,14 @@ public class User {
 //	@Size(min = 4, max = 15)
 	private String password;
 	
+	private String emailaddress;
+	
+	public String getEmailaddress() {
+		return emailaddress;
+	}
+	public void setEmailaddress(String emailaddress) {
+		this.emailaddress = emailaddress;
+	}
 	public String getUsername() {
 		return username;
 	}
