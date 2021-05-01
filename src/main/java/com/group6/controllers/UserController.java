@@ -32,6 +32,14 @@ public class UserController {
 		System.out.println("user.name=" + user.getUsername());
 		System.out.println("user.name=" + user.getPassword());
 		System.out.println("user.emailaddress=" + user.getEmailaddress());
+//		if (user.getEmailaddress() != null && user.getEmailaddress().equals("psmanningjr@gmail.com") & 
+//				user.getPassword() != null && user.getPassword().equals("paulsPassword")) {
+//			System.out.println("Paul logged in");
+//			return "redirect:/user/thank-you";
+//		}
+//		System.out.println("Invalid login");
+//		return "niceuser_login";
+		
 		if (errors.hasErrors()) {
 			System.out.println("found error in input");
 			return "niceuser_login";
