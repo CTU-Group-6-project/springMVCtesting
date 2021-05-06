@@ -117,12 +117,18 @@
                                 <div class="login_left col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                     <div class="login_box">
                                         <h2 class="title">Sign in</h2>
-                                        <form method="post" id="loginform" action="thank-you.html">
-                                            <div class="login_form">
+                                        <div th:if="${param.error}">
+          								  Invalid username and password.
+        								</div>
+        								<div th:if="${param.logout}">
+        								    You have been logged out.
+        								</div>
+        								<form th:action="@{/login}" id="loginform" method="post">
+            								<div class="login_form">
                                                 <ul>
                                                     <li>
                                                         <label for="EmailAddress">Email Address</label>
-                                                        <input class="form-control" id="EmailAddress" name="emailaddress" title="Email Address" type="email">
+                                                        <input class="form-control" id="EmailAddress" name="username" title="Email Address" type="email">
                                                     </li>
                                                     <li>
                                                         <label for="Password">Password</label>
@@ -136,18 +142,19 @@
                                                         <a href="#" class="trans">Forgotten Password ?</a>
                                                     </li>
                                                     <li>
-                                                        <button type="submit" class="loginbutton red_btn trans squre-btn hvr-ripple-out" name="Sign-In">Sign-In</button>
+                                                        <button type="submit" class="loginbutton red_btn trans squre-btn hvr-ripple-out" value="Sign In" >Sign-In</button>
                                                     </li>
                                                 </ul>
                                             </div>
-                                        </form>
+        								</form>
+                                        
                                     </div>
                                 </div>
                                 <div class="signup_right col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                     <div class="login_box">
                                         <h2 class="title">Create New Account</h2>
                                         <h4 class="create_ac">Create your Account</h4>
-                                        <form method="post" id="registrationform" action="thank-you.html">
+                                        <form method="post" id="registrationform" action="/thank-you.html">
                                             <ul>
                                                 <li>
                                                     <label for="EmailAddress">Email Address</label>
@@ -227,7 +234,7 @@
                                     <div class="main_cnt">
                                         <p class="sbcr_label">Subscribe for our Whoa Mama newsletter to
                                             <br> get Daily offers and deals...</p>
-                                        <form method="post" id="subscribeform" action="thank-you.html">
+                                        <form method="post" id="subscribeform" action="/thank-you.html">
                                             <div class="sbcrb_input">
                                                 <input type="text" name="subscribeemail" class="form-control" placeholder="Enter your email">
                                                 <button class="subscribebutton send" name="getbutton" type="submit">
