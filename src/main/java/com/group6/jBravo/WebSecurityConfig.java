@@ -39,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.password("longpassword")
 				.roles("USER")
 				.build();
-
+		
 		return new InMemoryUserDetailsManager(user);
 	}
 }
