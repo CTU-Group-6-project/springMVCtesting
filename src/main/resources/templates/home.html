@@ -7,5 +7,24 @@
         <h1>Welcome!</h1>
         
         <p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
+        <div>
+
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                </tr>
+                <tr th:each="item : ${items}">
+                    <td th:text="${item.id}">id</td>
+                    <td th:text="${item.name}">name</td>
+                    <td th:text="${item.description}">description</td>
+                    <td th:text="${item.price}">price</td>
+                </tr>
+
+            </table>
+
+        </div>
     </body>
 </html>

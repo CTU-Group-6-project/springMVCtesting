@@ -38,5 +38,13 @@ public class MenuController {
 ////   	  model.addAttribute("item",itemService.getItemById(itemId));
 //        return "item";
 //    }
+
+    @GetMapping("/home")
+    public String getAllItemshome(Model model) {
+        System.out.println("in get menu for home");
+        model.addAttribute("items",itemService.getAllItems());
+        return "home";
+    }
+
 }
 
