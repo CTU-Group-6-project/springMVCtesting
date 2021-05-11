@@ -1202,6 +1202,7 @@
             imagediv.appendChild(image);
             var item1div = document.getElementById("itembox1");
             item1div.appendChild(imagediv);
+
             var descrdiv = document.createElement("div");
             descrdiv.setAttribute('class', "PT_dscr");
             var descheading = document.createElement("h3");
@@ -1216,6 +1217,52 @@
             descrdiv.appendChild(descP);
             item1div.appendChild(descrdiv);
 
+            var optiondiv = document.createElement("div");
+            optiondiv.setAttribute('class', "PT_optn");
+            var radioUl = document.createElement("ul");
+            radioUl.setAttribute('class', "PT-radio");
+            var radioli = document.createElement("li");
+            var mediumRadioIn = document.createElement("input");
+            mediumRadioIn.setAttribute('type', 'radio');
+            mediumRadioIn.setAttribute('name', 'radio-group-1');
+            mediumRadioIn.setAttribute('id', 'radio-1');
+            mediumRadioIn.setAttribute('checked', 'checked');
+            var labelMedium = document.createElement('label');
+            labelMedium.setAttribute('for', 'radio-1');
+            labelMedium.innerText = 'Medium';
+            radioli.appendChild(mediumRadioIn);
+            radioli.appendChild(labelMedium);
+            radioUl.appendChild(radioli);
+
+            radioli = document.createElement("li");
+            mediumRadioIn = document.createElement("input");
+            mediumRadioIn.setAttribute('type', 'radio');
+            mediumRadioIn.setAttribute('name', 'radio-group-1');
+            mediumRadioIn.setAttribute('id', 'radio-2');
+            mediumRadioIn.setAttribute('checked', 'checked');
+            labelMedium = document.createElement('label');
+            labelMedium.setAttribute('for', 'radio-2');
+            labelMedium.innerText = 'Large';
+            radioli.appendChild(mediumRadioIn);
+            radioli.appendChild(labelMedium);
+            radioUl.appendChild(radioli);
+
+            radioli = document.createElement("li");
+            mediumRadioIn = document.createElement("input");
+            mediumRadioIn.setAttribute('type', 'radio');
+            mediumRadioIn.setAttribute('name', 'radio-group-1');
+            mediumRadioIn.setAttribute('id', 'radio-3');
+            mediumRadioIn.setAttribute('checked', 'checked');
+            labelMedium = document.createElement('label');
+            labelMedium.setAttribute('for', 'radio-3');
+            labelMedium.innerText = 'Extra Large';
+            radioli.appendChild(mediumRadioIn);
+            radioli.appendChild(labelMedium);
+            radioUl.appendChild(radioli);
+
+
+            optiondiv.appendChild(radioUl);
+             item1div.appendChild(optiondiv);
         </script>
     <!-- JS Here -->
 
