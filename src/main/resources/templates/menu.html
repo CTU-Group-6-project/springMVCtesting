@@ -1202,6 +1202,19 @@
             imagediv.appendChild(image);
             var item1div = document.getElementById("itembox1");
             item1div.appendChild(imagediv);
+            var descrdiv = document.createElement("div");
+            descrdiv.setAttribute('class', "PT_dscr");
+            var descheading = document.createElement("h3");
+            descheading.setAttribute('class', "PT_title");
+            var headingP = document.createElement("p");
+            headingP.innerText = [[${items[1].name}]] ;
+            descheading.appendChild(headingP);
+            descrdiv.appendChild(descheading);
+            var descP = document.createElement('p');
+            descP.setAttribute('class', 'PT_dtls');
+            descP.innerText = [[${items[1].description}]] ;
+            descrdiv.appendChild(descP);
+            item1div.appendChild(descrdiv);
 
         </script>
     <!-- JS Here -->
