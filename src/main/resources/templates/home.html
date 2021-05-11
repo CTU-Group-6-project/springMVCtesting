@@ -5,7 +5,7 @@
     </head>
     <body>
         <h1>Welcome!</h1>
-        
+
         <p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
         <div>
 
@@ -26,5 +26,15 @@
             </table>
 
         </div>
+        <div id="div1">
+        </div>
+        <script th:inline="javascript">
+            var item1desc = [[${items[1].description}]];
+            var para = document.createElement("p");
+            var node = document.createTextNode("the item description:'"+ item1desc + "'");
+            para.appendChild(node);
+            var element = document.getElementById("div1");
+            element.appendChild(para);
+        </script>
     </body>
 </html>
