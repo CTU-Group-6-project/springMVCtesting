@@ -1191,7 +1191,11 @@
     <script src="js/custome.js" defer></script>
     <script src="js/slick.js" defer></script>
     <script src="js/jquery.validate.min.js" defer></script>
+    <script src="js/menu.generation.js" ></script>
     <script th:inline="javascript">
+        generateMenu( [[${items[1].description}]] , [[${items[1].name}]] , [[${items[1].price}]] );
+
+/*
             var item1desc = [[${items[1].description}]];
             var imagediv = document.createElement("div");
             imagediv.setAttribute('class', "PT_image");
@@ -1202,7 +1206,6 @@
             imagediv.appendChild(image);
             var item1div = document.getElementById("itembox1");
             item1div.appendChild(imagediv);
-
             var descrdiv = document.createElement("div");
             descrdiv.setAttribute('class', "PT_dscr");
             var descheading = document.createElement("h3");
@@ -1274,7 +1277,7 @@
             priceDiv.appendChild(addToCartButton);
             descrdiv.appendChild(priceDiv);
             item1div.appendChild(descrdiv);
-
+*/
         </script>
     <!-- JS Here -->
 
