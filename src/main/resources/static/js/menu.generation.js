@@ -1,27 +1,34 @@
 /* Create menu from items variable */
-function generateMenu(item1desc, item1name, item1price) {
-    var item1desc = item1desc;
+function generateMenu(items) {
+    items.forEach(generateItem);
+}
+
+function generateItem(item, index, array) {
+    var pizzaItemsRow = document.getElementById("pizza_items_row");
+    var itemDiv = document.createElement("div");
+    itemDiv.setAttribute('class', "col-lg-4 col-md-6 col-sm-6 col-xs-12");
+    var itemBox = document.createElement("div");
+    itemBox.setAttribute('class', "P_itmesbox");
     var imagediv = document.createElement("div");
     imagediv.setAttribute('class', "PT_image");
     var image = document.createElement("img");
     image.setAttribute('class', "absoImg");
-    image.setAttribute('src', "images/Bacon-Cheeseburger.png");
+    image.setAttribute('src', item.imageName);
     image.setAttribute('alt',"");
     imagediv.appendChild(image);
-    var item1div = document.getElementById("itembox1");
-    item1div.appendChild(imagediv);
+    itemBox.appendChild(imagediv);
 
     var descrdiv = document.createElement("div");
     descrdiv.setAttribute('class', "PT_dscr");
     var descheading = document.createElement("h3");
     descheading.setAttribute('class', "PT_title");
     var headingP = document.createElement("p");
-    headingP.innerText = item1name;
+    headingP.innerText = item.name;
     descheading.appendChild(headingP);
     descrdiv.appendChild(descheading);
     var descP = document.createElement('p');
     descP.setAttribute('class', 'PT_dtls');
-    descP.innerText = item1desc ;
+    descP.innerText = item.description ;
     descrdiv.appendChild(descP);
 
     var optiondiv = document.createElement("div");
@@ -73,7 +80,7 @@ function generateMenu(item1desc, item1name, item1price) {
     priceDiv.setAttribute('class', "price_block");
     var priceItemDiv = document.createElement("div");
     priceItemDiv.setAttribute('class', 'price');
-    priceItemDiv.innerText = '$'+ item1price;
+    priceItemDiv.innerText = '$'+ item.price;
     var addToCartButton = document.createElement('a');
     addToCartButton.setAttribute('href', '#');
     addToCartButton.setAttribute('class', 'card_btn');
@@ -81,5 +88,7 @@ function generateMenu(item1desc, item1name, item1price) {
     priceDiv.appendChild(priceItemDiv);
     priceDiv.appendChild(addToCartButton);
     descrdiv.appendChild(priceDiv);
-    item1div.appendChild(descrdiv);
+    itemBox.appendChild(descrdiv);
+    itemDiv.appendChild(itemBox);
+    pizzaItemsRow.appendChild(itemDiv);
 }
