@@ -5,90 +5,102 @@ function generateMenu(items) {
 
 function generateItem(item, index, array) {
     var pizzaItemsRow = document.getElementById("pizza_items_row");
-    var itemDiv = document.createElement("div");
-    itemDiv.setAttribute('class', "col-lg-4 col-md-6 col-sm-6 col-xs-12");
-    var itemBox = document.createElement("div");
-    itemBox.setAttribute('class', "P_itmesbox");
-    var imagediv = document.createElement("div");
-    imagediv.setAttribute('class', "PT_image");
-    var image = document.createElement("img");
-    image.setAttribute('class', "absoImg");
-    image.setAttribute('src', item.imageName);
-    image.setAttribute('alt',"");
-    imagediv.appendChild(image);
+    var imagediv =  createDivWithClass("PT_image");
+    imagediv.appendChild(createImage(item.imageName));
+    var itemBox = createDivWithClass("P_itmesbox")
     itemBox.appendChild(imagediv);
 
-    var descrdiv = document.createElement("div");
-    descrdiv.setAttribute('class', "PT_dscr");
-    var descheading = document.createElement("h3");
-    descheading.setAttribute('class', "PT_title");
-    var headingP = document.createElement("p");
-    headingP.innerText = item.name;
-    descheading.appendChild(headingP);
+    var descrdiv = createDivWithClass("PT_dscr");
+    var descheading = createH3WithClass("PT_title");
+    descheading.appendChild(createParagraph(item.name));
     descrdiv.appendChild(descheading);
-    var descP = document.createElement('p');
-    descP.setAttribute('class', 'PT_dtls');
-    descP.innerText = item.description ;
-    descrdiv.appendChild(descP);
+    descrdiv.appendChild(createParagraphWithClass(item.description, 'PT_dtls' ));
 
-    var optiondiv = document.createElement("div");
-    optiondiv.setAttribute('class', "PT_optn");
-    var radioUnOrderedList = document.createElement("ul");
-    radioUnOrderedList.setAttribute('class', "PT-radio");
-    var radioListItem = document.createElement("li");
-    var radioInput = document.createElement("input");
-    radioInput.setAttribute('type', 'radio');
-    radioInput.setAttribute('name', 'radio-group-1');
-    radioInput.setAttribute('id', 'radio-1');
-    radioInput.setAttribute('checked', 'checked');
-    var radioInputLabel = document.createElement('label');
-    radioInputLabel.setAttribute('for', 'radio-1');
-    radioInputLabel.innerText = 'Medium';
-    radioListItem.appendChild(radioInput);
-    radioListItem.appendChild(radioInputLabel);
+    var optiondiv = createDivWithClass("PT_optn");
+    var radioUnOrderedList = createUlWithClass("PT-radio");
+    var radioListItem = createRadioItem('radio-group-1', 'radio-1', 'radio-1', 'Medium')
     radioUnOrderedList.appendChild(radioListItem);
 
-    radioListItem = document.createElement("li");
-    radioInput = document.createElement("input");
-    radioInput.setAttribute('type', 'radio');
-    radioInput.setAttribute('name', 'radio-group-1');
-    radioInput.setAttribute('id', 'radio-2');
-    radioInput.setAttribute('checked', 'checked');
-    radioInputLabel = document.createElement('label');
-    radioInputLabel.setAttribute('for', 'radio-2');
-    radioInputLabel.innerText = 'Large';
-    radioListItem.appendChild(radioInput);
-    radioListItem.appendChild(radioInputLabel);
+    radioListItem =  createRadioItem('radio-group-1', 'radio-2', 'radio-2', 'Large')
     radioUnOrderedList.appendChild(radioListItem);
 
-    radioListItem = document.createElement("li");
-    radioInput = document.createElement("input");
-    radioInput.setAttribute('type', 'radio');
-    radioInput.setAttribute('name', 'radio-group-1');
-    radioInput.setAttribute('id', 'radio-3');
-    radioInput.setAttribute('checked', 'checked');
-    radioInputLabel = document.createElement('label');
-    radioInputLabel.setAttribute('for', 'radio-3');
-    radioInputLabel.innerText = 'Extra Large';
-    radioListItem.appendChild(radioInput);
-    radioListItem.appendChild(radioInputLabel);
+    radioListItem =  createRadioItem('radio-group-1', 'radio-3', 'radio-3', 'Extra Large')
     radioUnOrderedList.appendChild(radioListItem);
+
     optiondiv.appendChild(radioUnOrderedList);
     descrdiv.appendChild(optiondiv);
 
-    var priceDiv = document.createElement("div");
-    priceDiv.setAttribute('class', "price_block");
-    var priceItemDiv = document.createElement("div");
-    priceItemDiv.setAttribute('class', 'price');
+    var priceDiv = createDivWithClass("price_block");
+    var priceItemDiv = createDivWithClass('price');
     priceItemDiv.innerText = '$'+ item.price;
-    var addToCartButton = document.createElement('a');
-    addToCartButton.setAttribute('href', '#');
-    addToCartButton.setAttribute('class', 'card_btn');
-    addToCartButton.innerText = 'Add to cart';
+
     priceDiv.appendChild(priceItemDiv);
-    priceDiv.appendChild(addToCartButton);
+    priceDiv.appendChild(createCartButton('#'));
     descrdiv.appendChild(priceDiv);
     itemBox.appendChild(descrdiv);
+
+    var itemDiv = createDivWithClass("col-lg-4 col-md-6 col-sm-6 col-xs-12");
     itemDiv.appendChild(itemBox);
     pizzaItemsRow.appendChild(itemDiv);
+}
+
+function createElementWithClass(elementType, elementClass) {
+    var divItem = document.createElement(elementType);
+    divItem.setAttribute('class', elementClass);
+    return divItem;
+}
+
+function createDivWithClass(divClass) {
+    return createElementWithClass("div", divClass);
+}
+
+function createParagraph(paragraphContent) {
+    var paragraphItem = document.createElement("p");
+    paragraphItem.innerText = paragraphContent;
+    return paragraphItem;
+}
+
+function createParagraphWithClass(paragraphContent, paragraphType) {
+    paragraphItem = createParagraph(paragraphContent);
+    paragraphItem.setAttribute('class', paragraphType);
+    return paragraphItem;
+}
+
+function createImage(imagePath) {
+    var image = document.createElement("img");
+    image.setAttribute('class', "absoImg");
+    image.setAttribute('src', imagePath);
+    image.setAttribute('alt',"");
+    return image;
+}
+
+function createUlWithClass(ulClass) {
+    return createElementWithClass("ul", ulClass);
+}
+
+function createH3WithClass(h3Class) {
+    return createElementWithClass("h3", h3Class);
+}
+
+function createRadioItem(radioGroup, id, forValue, text) {
+    var radioListItem = document.createElement("li");
+    var radioInput = document.createElement("input");
+    radioInput.setAttribute('type', 'radio');
+    radioInput.setAttribute('name',radioGroup);
+    radioInput.setAttribute('id', id);
+    radioInput.setAttribute('checked', 'checked');
+    var radioInputLabel = document.createElement('label');
+    radioInputLabel.setAttribute('for', forValue);
+    radioInputLabel.innerText = text;
+    radioListItem.appendChild(radioInput);
+    radioListItem.appendChild(radioInputLabel);
+    return radioListItem;
+}
+
+function createCartButton(href) {
+var cartButton = document.createElement('a');
+    cartButton.setAttribute('href', href);
+    cartButton.setAttribute('class', 'card_btn');
+    cartButton.innerText = 'Add to cart';
+    return cartButton;
 }
