@@ -6,15 +6,28 @@ public class OrderItem {
     String name;
     String description;
     String price;
+    String category;
+    String sizes;
 
+    public final static String PIZZA_CATEGORY = "pizza";
+    public final static String SANDWICH_CATEGORY = "sandwich";
+    public final static String SALAD_CATEGORY = "salad";
+    public final static String DESSERT_CATEGORY = "dessert";
+    public final static String BEVERAGE_CATEGORY = "beverage";
 
-    public OrderItem(String id, String imageName, String name, String description, String price) {
+    public final static String SINGLE_SIZE = "oneSize";
+    public final static String THREE_SIZES = "threeSizes";
+
+    public OrderItem(String id, String imageName, String name, String description, String price,
+                     String category, String sizes) {
         super();
         this.id = id;
         this.imageName = imageName;
         this.name = name;
         this.description = description;
         this.price = price;
+        this.category = category;
+        this.sizes = sizes;
     }
 
     public String getId() {
@@ -48,4 +61,19 @@ public class OrderItem {
         this.price = price;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getSizes() {
+        return sizes;
+    }
+
+    public void setSizes(String sizes) {
+        this.sizes = sizes;
+    }
 }

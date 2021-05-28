@@ -4,7 +4,20 @@ function generateMenu(items) {
 }
 
 function generateItem(item, index, array) {
-    var pizzaItemsRow = document.getElementById("pizza_items_row");
+    var itemsRow
+    if (item.category == "pizza") {
+        itemsRow = document.getElementById("pizza_items_row");
+    } else if (item.category == "beverage") {
+        itemsRow = document.getElementById("beverage_items_row");
+    } else if (item.category == "salad") {
+        itemsRow = document.getElementById("salad_items_row");
+    } else if (item.category == "sandwich") {
+              itemsRow = document.getElementById("sandwich_items_row");
+    } else if (item.category == "dessert") {
+                   itemsRow = document.getElementById("dessert_items_row");
+    }
+
+    var i
     var imagediv =  createDivWithClass("PT_image");
     imagediv.appendChild(createImage(item.imageName));
     var itemBox = createDivWithClass("P_itmesbox")
@@ -16,20 +29,21 @@ function generateItem(item, index, array) {
     descrdiv.appendChild(descheading);
     descrdiv.appendChild(createParagraphWithClass(item.description, 'PT_dtls' ));
 
-    var optiondiv = createDivWithClass("PT_optn");
-    var radioUnOrderedList = createUlWithClass("PT-radio");
-    var radioListItem = createRadioItem('radio-group-1', 'radio-1', 'radio-1', 'Medium')
-    radioUnOrderedList.appendChild(radioListItem);
+    if (item.sizes == "threeSizes") {
+        var optiondiv = createDivWithClass("PT_optn");
+        var radioUnOrderedList = createUlWithClass("PT-radio");
+        var radioListItem = createRadioItem('radio-group-1', 'radio-1', 'radio-1', 'Medium')
+        radioUnOrderedList.appendChild(radioListItem);
 
-    radioListItem =  createRadioItem('radio-group-1', 'radio-2', 'radio-2', 'Large')
-    radioUnOrderedList.appendChild(radioListItem);
+        radioListItem =  createRadioItem('radio-group-1', 'radio-2', 'radio-2', 'Large')
+        radioUnOrderedList.appendChild(radioListItem);
 
-    radioListItem =  createRadioItem('radio-group-1', 'radio-3', 'radio-3', 'Extra Large')
-    radioUnOrderedList.appendChild(radioListItem);
+        radioListItem =  createRadioItem('radio-group-1', 'radio-3', 'radio-3', 'Extra Large')
+        radioUnOrderedList.appendChild(radioListItem);
 
-    optiondiv.appendChild(radioUnOrderedList);
-    descrdiv.appendChild(optiondiv);
-
+        optiondiv.appendChild(radioUnOrderedList);
+        descrdiv.appendChild(optiondiv);
+    }
     var priceDiv = createDivWithClass("price_block");
     var priceItemDiv = createDivWithClass('price');
     priceItemDiv.innerText = '$'+ item.price;
@@ -41,7 +55,7 @@ function generateItem(item, index, array) {
 
     var itemDiv = createDivWithClass("col-lg-4 col-md-6 col-sm-6 col-xs-12");
     itemDiv.appendChild(itemBox);
-    pizzaItemsRow.appendChild(itemDiv);
+    itemsRow.appendChild(itemDiv);
 }
 
 function createElementWithClass(elementType, elementClass) {

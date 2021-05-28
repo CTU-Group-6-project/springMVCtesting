@@ -14,21 +14,12 @@ public class MenuController {
     private ItemService itemService;
 
     @GetMapping("/menu.html")
-    public String getAllItems(Model model) {
+    public String getMenuPage(Model model) {
         System.out.println("in get menu");
-//		List<com.group6.models.OrderItem> listOfItems = new ArrayList<>();
-//		listOfItems.add(new OrderItem("1","Woah Mama Pizza",
-//				"Tender chicken with our Ranch sauce, cheddar cheese, onions, bell peppers, jalapeños, bacon, & mozzarella cheese.",
-//				10.0));
-//		listOfItems.add(new OrderItem("2","BACON CHEESEBURGER",
-//				"Fresh-cooked juicy hamburger, bacon, cheddar cheese, onion, & mozzarella cheese.",
-//				9.89));
-//		listOfItems.add(new OrderItem("3","BBQ BLAST",
-//				"Juicy chicken with our BBQ sauce, cheddar cheese, onions, bell peppers, jalapeños, bacon & mozzarella cheese.",
-//				4.10));
-//		model.addAttribute("items",listOfItems);
-        model.addAttribute("items",itemService.getAllItems());
-//		System.out.println(itemService.getAllItems());
+        model.addAttribute("pizzaItems",itemService.getPizzaItems());
+        model.addAttribute("sandwichItems",itemService.getSandwichItems());
+        model.addAttribute("saladItems",itemService.getSaladItems());
+        model.addAttribute("beverageItems",itemService.getBeverageItems());
         return "menu";
     }
 
@@ -42,7 +33,7 @@ public class MenuController {
     @GetMapping("/home")
     public String getAllItemshome(Model model) {
         System.out.println("in get menu for home");
-        model.addAttribute("items",itemService.getAllItems());
+        model.addAttribute("items",itemService.getPizzaItems());
         return "home";
     }
 
