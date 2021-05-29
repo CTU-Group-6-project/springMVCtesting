@@ -674,10 +674,7 @@
     <script src="js/jquery.validate.min.js" defer></script>
     <script src="js/menu.generation.js" ></script>
     <script th:inline="javascript">
-        generateMenu( [[${pizzaItems}]] );
-        generateMenu( [[${sandwichItems}]] );
-        generateMenu( [[${saladItems}]] );
-        generateMenu( [[${beverageItems}]] );
+        generateMenu( [[${menuItems}]] );
         generateYourOrder( [[${cart}]] );
         </script>
     <!-- JS Here -->

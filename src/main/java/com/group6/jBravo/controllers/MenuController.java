@@ -20,10 +20,7 @@ public class MenuController {
     @GetMapping("/menu.html")
     public String getMenuPage(Model model) {
         System.out.println("in get menu");
-        model.addAttribute("pizzaItems",itemService.getPizzaItems());
-        model.addAttribute("sandwichItems",itemService.getSandwichItems());
-        model.addAttribute("saladItems",itemService.getSaladItems());
-        model.addAttribute("beverageItems",itemService.getBeverageItems());
+        model.addAttribute("menuItems",itemService.getMenuItems());
         model.addAttribute("cart", cartService.getCart());
         return "menu";
     }
@@ -38,7 +35,7 @@ public class MenuController {
     @GetMapping("/home")
     public String getAllItemshome(Model model) {
         System.out.println("in get menu for home");
-        model.addAttribute("items",itemService.getPizzaItems());
+        model.addAttribute("items",itemService.getMenuItems());
         return "home";
     }
 

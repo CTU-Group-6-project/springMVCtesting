@@ -32,13 +32,14 @@ function generateItem(item, index, array) {
     if (item.sizes == "threeSizes") {
         var optiondiv = createDivWithClass("PT_optn");
         var radioUnOrderedList = createUlWithClass("PT-radio");
-        var radioListItem = createRadioItem('radio-group-1', 'radio-1', 'radio-1', 'Medium', "checked")
+        baseIndex = (index + 1)*10;
+        var radioListItem = createRadioItem('radio-group-' + baseIndex, 'radio-'+ (baseIndex+1), 'radio-'+ (baseIndex+1), 'Medium', "checked")
         radioUnOrderedList.appendChild(radioListItem);
 
-        radioListItem =  createRadioItem('radio-group-1', 'radio-2', 'radio-2', 'Large', "")
+        radioListItem =  createRadioItem('radio-group-' + baseIndex, 'radio-'+ (baseIndex+2), 'radio-'+ (baseIndex+2), 'Large', "")
         radioUnOrderedList.appendChild(radioListItem);
 
-        radioListItem =  createRadioItem('radio-group-1', 'radio-3', 'radio-3', 'Extra Large', "")
+        radioListItem =  createRadioItem('radio-group-' + baseIndex, 'radio-'+ (baseIndex+3), 'radio-'+ (baseIndex+3), 'Extra Large', "")
         radioUnOrderedList.appendChild(radioListItem);
 
         optiondiv.appendChild(radioUnOrderedList);

@@ -10,7 +10,7 @@ import java.util.function.Predicate;
 @Service
 public class ItemService {
 
-    public List<OrderItem> getPizzaItems() {
+    public List<OrderItem> getMenuItems() {
 
         List<OrderItem> listOfItems = new ArrayList<>();
         listOfItems.add(new OrderItem("1", "images/woahmama.png", "Woah Mama Pizza",
@@ -37,12 +37,6 @@ public class ItemService {
         listOfItems.add(new OrderItem("8", "images/Mighty-Meaty.png","Mighty Meaty",
                 "Loaded up with pepperoni, ham, bacon, hamburger, sausage, & mozzarella cheese.",
                 "10.00", OrderItem.PIZZA_CATEGORY, OrderItem.THREE_SIZES,"images/cartItem.png"));
-        return listOfItems;
-    }
-
-    public List<OrderItem> getSandwichItems() {
-
-        List<OrderItem> listOfItems = new ArrayList<>();
         listOfItems.add(new OrderItem("1001", "images/BBQ-Chicken-Flip-02.png", "BBQ-Chicken flip",
                 "Juicy chicken with our BBQ sauce, cheddar cheese, onions, bell peppers, jalapeños, bacon & mozzarella cheese.",
                 "10.00", OrderItem.SANDWICH_CATEGORY, OrderItem.SINGLE_SIZE,"images/cartItem.png"));
@@ -61,12 +55,6 @@ public class ItemService {
         listOfItems.add(new OrderItem("1006", "images/Muffuletta-Flip-02.png","Muffuletta Flip",
                 "Spicy salami, tender ham, mustard, olive mix and 100% mozzarella cheese!",
                 "15.00", OrderItem.SANDWICH_CATEGORY, OrderItem.SINGLE_SIZE,"images/cartItem.png"));
-        return listOfItems;
-    }
-
-    public List<OrderItem> getBeverageItems() {
-
-        List<OrderItem> listOfItems = new ArrayList<>();
         listOfItems.add(new OrderItem("4001", "images/margarita5.png", "WHO’S TO BLAME",
                 "jBravo Gold Tequila, triple sec and our house margarita blend.",
                 "10.00", OrderItem.BEVERAGE_CATEGORY, OrderItem.THREE_SIZES,"images/cartItem.png"));
@@ -85,12 +73,6 @@ public class ItemService {
         listOfItems.add(new OrderItem("4006", "images/drink9.png","WATERMELON MARGARITA",
                 "jBravo Silver Tequila, triple sec, watermelon purée and our house margarita blend.",
                 "10.00", OrderItem.BEVERAGE_CATEGORY, OrderItem.THREE_SIZES,"images/cartItem.png"));
-        return listOfItems;
-    }
-
-    public List<OrderItem> getSaladItems() {
-
-        List<OrderItem> listOfItems = new ArrayList<>();
         listOfItems.add(new OrderItem("2001", "images/Chicken-Bacon-Salad.png", "Chicken Bacon Salad",
                 "Crisp fresh lettuce, chicken, bacon, cheddar, red onion, bell pepper, & tomato.",
                 "10.00", OrderItem.SALAD_CATEGORY, OrderItem.SINGLE_SIZE,"images/cartItem.png"));
@@ -140,6 +122,6 @@ public class ItemService {
     }
 
     public OrderItem filterItems(Predicate<OrderItem> strategy) {
-        return getPizzaItems().stream().filter(strategy).findFirst().orElse(null);
+        return getMenuItems().stream().filter(strategy).findFirst().orElse(null);
     }
 }
