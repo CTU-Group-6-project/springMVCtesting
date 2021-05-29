@@ -1,5 +1,6 @@
 package com.group6.jBravo.controllers;
 
+import com.group6.jBravo.services.CartService;
 import com.group6.jBravo.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,9 @@ public class MenuController {
     @Autowired
     private ItemService itemService;
 
+    @Autowired
+    private CartService cartService;
+
     @GetMapping("/menu.html")
     public String getMenuPage(Model model) {
         System.out.println("in get menu");
@@ -20,6 +24,7 @@ public class MenuController {
         model.addAttribute("sandwichItems",itemService.getSandwichItems());
         model.addAttribute("saladItems",itemService.getSaladItems());
         model.addAttribute("beverageItems",itemService.getBeverageItems());
+        model.addAttribute("cart", cartService.getCart());
         return "menu";
     }
 
