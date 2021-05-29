@@ -103,6 +103,36 @@ public class ItemService {
         return listOfItems;
     }
 
+//    public List<OrderItem> getDessertItems() {
+//
+//        List<OrderItem> listOfItems = new ArrayList<>();
+//        listOfItems.add(new OrderItem("3001", "images/Cinnamon-Sticks-600px.png", "CINNAMON STICKS",
+//                "Deep-pan crust topped with cinnamon, sugar & sweet frosting!",
+//                "10.00", OrderItem.DESSERT_CATEGORY, OrderItem.THREE_SIZES));
+//        listOfItems.add(new OrderItem("3002", "images/Cookie-600px.png", "8″ CHOCOLATE CHIP COOKIE",
+//                "Soft 8-inch chocolate chip cookie dotted with softly melted chocolate chips in every bite.",
+//                "10.00", OrderItem.DESSERT_CATEGORY, OrderItem.THREE_SIZES));
+//        listOfItems.add(new OrderItem("3003", "images/Peach-Puddin-Pie-600px.png", "PEACH PUDDIN’ PIE",
+//                "Yummy peaches baked into sweet pudding in a house-made crust. Baked fresh in house!",
+//                "10.00", OrderItem.DESSERT_CATEGORY, OrderItem.THREE_SIZES));
+//        listOfItems.add(new OrderItem("3004", "images/ChocolateCake.png", "Molten Chocolate Cake",
+//                "Crinkle cut Desserts just look like a good time. They're thick and heavy",
+//                "10.00", OrderItem.DESSERT_CATEGORY, OrderItem.THREE_SIZES));
+//        listOfItems.add(new OrderItem("3005", "images/ChocloateCookie.png", "Skillet Chocolate Chip Cookie",
+//                "Topped with vanilla ice cream, hot fudge.",
+//                "10.00", OrderItem.DESSERT_CATEGORY, OrderItem.THREE_SIZES));
+//        listOfItems.add(new OrderItem("3005", "images/StawberryCheeseCake.png", "FRESH STRAWBERRY CHEESECAKE",
+//                "The Original Topped with Glazed Fresh Strawberries. Our Most Popular Flavor for Over 35 Years!",
+//                "10.00", OrderItem.DESSERT_CATEGORY, OrderItem.THREE_SIZES));
+//        listOfItems.add(new OrderItem("3006", "images/CARAMELICIOUS.png", "CHOCOLATE CARAMELICIOUS",
+//                "Original Cheesecake Swirled with Snickers® on a Brownie Crust with Chocolate, Caramel and Peanuts.",
+//                "10.00", OrderItem.DESSERT_CATEGORY, OrderItem.THREE_SIZES));
+//        listOfItems.add(new OrderItem("3007", "images/CaramelAppleCheesecake.png", "CARAMEL APPLE CHEESECAKE",
+//                "Our Creamy Original Cheesecake Loaded with Caramel Apples, Topped with More Caramel on a Graham Crust.",
+//                "10.00", OrderItem.DESSERT_CATEGORY, OrderItem.THREE_SIZES));
+//        return listOfItems;
+//    }
+
     public OrderItem getItemById(String id) {
 
         Predicate<OrderItem> byId = p -> p.getId().equals(id);
