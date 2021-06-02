@@ -1,15 +1,25 @@
-/*jBravo_group_ip
+/*
+  _____                           __  
+ / ____|                         / /  
+| |  __ _ __ ___  _   _ _ __    / /_  
+| | |_ | '__/ _ \| | | | '_ \  | '_ \ 
+| |__| | | | (_) | |_| | |_) | | (_) |
+ \_____|_|  \___/ \__,_| .__/   \___/ 
+                       | |            
+                       |_|            
 
 
 
- Website: http://kenwheeler.github.io
-    Docs: http://kenwheeler.github.io/slick
-    Repo: http://github.com/kenwheeler/slick
-  Issues: http://github.com/kenwheeler/slick/issues
+   _ ____                         _____ _              
+  (_)  _ \                       |  __ (_)             
+   _| |_) |_ __ __ ___   _____   | |__) | __________ _ 
+  | |  _ <| '__/ _` \ \ / / _ \  |  ___/ |_  /_  / _` |
+  | | |_) | | | (_| |\ V / (_) | | |   | |/ / / / (_| |
+  | |____/|_|  \__,_| \_/ \___/  |_|   |_/___/___\__,_|
+ _/ |                                                  
+|__/                                                   
 
- */
-/* global window, document, define, jQuery, setInterval, clearInterval */
-
+*/
 
 (function(factory) {
     'use strict';

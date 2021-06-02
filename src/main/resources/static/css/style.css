@@ -1,4 +1,25 @@
-/* custome css start */
+/*
+  _____                           __  
+ / ____|                         / /  
+| |  __ _ __ ___  _   _ _ __    / /_  
+| | |_ | '__/ _ \| | | | '_ \  | '_ \ 
+| |__| | | | (_) | |_| | |_) | | (_) |
+ \_____|_|  \___/ \__,_| .__/   \___/ 
+                       | |            
+                       |_|            
+
+
+
+   _ ____                         _____ _              
+  (_)  _ \                       |  __ (_)             
+   _| |_) |_ __ __ ___   _____   | |__) | __________ _ 
+  | |  _ <| '__/ _` \ \ / / _ \  |  ___/ |_  /_  / _` |
+  | | |_) | | | (_| |\ V / (_) | | |   | |/ / / / (_| |
+  | |____/|_|  \__,_| \_/ \___/  |_|   |_/___/___\__,_|
+ _/ |                                                  
+|__/                                                   
+
+*/
  html {
      -webkit-font-smoothing: antialiased;
 }
@@ -418,6 +439,7 @@
      margin-left: 52px;
      margin-top: 29px;
      transition: 1s ease-in-out;
+     
 }
  .Cart .Cart_count {
      width: 130px;
@@ -493,7 +515,7 @@
      width: 100%;
      vertical-align: top;
      overflow: hidden;
-     background: url(../images/banner_2.png) no-repeat;
+     background: url(../images/pizza_day.gif) no-repeat;
      background-position: top;
      background-attachment: fixed;
      height: 389px;
@@ -504,7 +526,7 @@
      width: 100%;
      vertical-align: top;
      overflow: hidden;
-     background: url(../images/Main_Banner.png) no-repeat;
+     background: url(../images/BlackBanner.png) no-repeat;
      background-position: top;
      background-attachment: fixed;
      height: 738px;
@@ -539,7 +561,7 @@
      left: 0;
      bottom: 0;
      text-align: center;
-     background:url(../images/Main_Banner.png) no-repeat;
+     background:url(../images/BlackBanner.png) no-repeat;
      background-size: cover;
      background-position: bottom;
      opacity: 0;
@@ -949,7 +971,7 @@
      display: inline-block;
      width: 100%;
      vertical-align: top;
-     background: url("../images/page_bg.png");
+     background: url("../images/MenuBackground.png");
      background-repeat: no-repeat;
      background-size: cover;
      background-position: top center;
@@ -1771,7 +1793,7 @@
      display: inline-block;
      width: 100%;
      vertical-align: top;
-     background: url("../images/banner_2.png") no-repeat;
+     background: url("../images/pizza_day.gif") no-repeat;
      background-size: cover;
      background-position:center;
      background-attachment: fixed;
@@ -1807,13 +1829,13 @@
 }
 /* Order Online section */
 /*============ About ====================*/
-/*============ Our menu ====================*/
-/* Our menu */
+/*============ jBravo Menu ====================*/
+/* jBravo Menu */
  .Our_menu {
      display: inline-block;
      width: 100%;
      vertical-align: top;
-     background: url("../images/page_bg.png");
+     background: url("../images/MenuBackground.png");
      background-size: cover;
 }
  .main_Ourmenu {
@@ -1946,7 +1968,7 @@
      text-align: center;
      margin-bottom: 30px;
 }
-/* Our menu */
+/* jBravo Menu */
 /* Quick border */
  .quick_order {
      display: inline-block;
@@ -2425,7 +2447,7 @@
      margin-bottom: 50px;
 }
 /*=============== Fifth Menu ================*/
-/*============ Our menu ====================*/
+/*============ jBravo Menu ====================*/
  .content_menu.bottom_pitch {
      margin-top: 0;
      margin-bottom: 30px;
@@ -2811,7 +2833,7 @@
      width: 100%;
      vertical-align: top;
      padding-bottom: 50px;
-     background:url('../images/CartBackGround.png');
+     background:url('../images/Cart.png');
      background-repeat:repeat;
      background-position:center top;
 }
@@ -3267,7 +3289,7 @@
      width:100%;
      padding-top:65px;
      padding-bottom:155px;
-     background: url(../images/CartBackGround.png);
+     background: url(../images/MenuBackground.png);
      background-repeat: repeat;
      background-position: center top;
 }
@@ -3369,7 +3391,7 @@
      width: 100%;
      padding-top: 55px;
      padding-bottom: 80px;
-     background: url(../images/CartBackGround.png);
+     background: url(../images/MenuBackground.png);
      background-repeat: repeat;
      background-position: center top;
 }
@@ -3512,7 +3534,7 @@
      width: 100%;
      padding-top: 48px;
      padding-bottom: 30px;
-     background: url(../images/CartBackGround.png);
+     background: url(../images/MenuBackground.png);
      background-repeat: repeat;
      background-position: center top;
 }
@@ -3654,7 +3676,7 @@
      width: 100%;
      padding-top: 57px;
      padding-bottom: 54px;
-     background: url(../images/CartBackGround.png);
+     background: url(../images/MenuBackground.png);
      background-repeat: repeat;
      background-position: center top;
 }
@@ -3791,7 +3813,7 @@
 }
  .bg-404{
      vertical-align: top;
-     background: url(../images/page_bg.png);
+     background: url(../images/MenuBackground.png);
      background-repeat: no-repeat;
      background-size: cover;
      background-position: top center;
@@ -3820,7 +3842,7 @@
      width: 100%;
      padding-top: 48px;
      padding-bottom: 35px;
-     background: url(../images/CartBackGround.png);
+     background: url(../images/MenuBackground.png);
      background-repeat: repeat;
      background-position: center top;
 }
@@ -3877,7 +3899,7 @@
      width: 100%;
      padding-top: 80px;
      padding-bottom: 65px;
-     background: url(../images/CartBackGround.png);
+     background: url(../images/MenuBackground.png);
      background-repeat: repeat;
      background-position: center top;
      text-align:center;

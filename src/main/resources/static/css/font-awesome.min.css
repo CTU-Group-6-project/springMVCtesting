@@ -1,7 +1,26 @@
-/*!
- *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
- *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
- */@font-face{font-family:'FontAwesome';src:url('../fonts/fontawesome-webfont.eot?v=4.7.0');src:url('../fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'),url('../fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'),url('../fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'),url('../fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'),url('../fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg');font-weight:normal;font-style:normal}
+/*
+  _____                           __  
+ / ____|                         / /  
+| |  __ _ __ ___  _   _ _ __    / /_  
+| | |_ | '__/ _ \| | | | '_ \  | '_ \ 
+| |__| | | | (_) | |_| | |_) | | (_) |
+ \_____|_|  \___/ \__,_| .__/   \___/ 
+                       | |            
+                       |_|            
+
+
+
+   _ ____                         _____ _              
+  (_)  _ \                       |  __ (_)             
+   _| |_) |_ __ __ ___   _____   | |__) | __________ _ 
+  | |  _ <| '__/ _` \ \ / / _ \  |  ___/ |_  /_  / _` |
+  | | |_) | | | (_| |\ V / (_) | | |   | |/ / / / (_| |
+  | |____/|_|  \__,_| \_/ \___/  |_|   |_/___/___\__,_|
+ _/ |                                                  
+|__/                                                   
+
+*/
+@font-face{font-family:'FontAwesome';src:url('../fonts/fontawesome-webfont.eot?v=4.7.0');src:url('../fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'),url('../fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'),url('../fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'),url('../fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'),url('../fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg');font-weight:normal;font-style:normal}
  
  .fa{display:inline-block;font:normal normal normal 14px/1 FontAwesome;font-size:inherit;text-rendering:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
  
