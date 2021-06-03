@@ -1,4 +1,5 @@
 <!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
@@ -116,7 +117,7 @@
                         </div>
                         <div class="col-md-12">
                             <div class="cart_list">
-                                <ul class="inner_cartlist">
+                                <ul class="inner_cartlist" id="cart_items_list">
                                     <li class="header">
                                         <div class="main_head">
                                             <div class="edit">&nbsp;</div>
@@ -131,202 +132,208 @@
                                         </div>
                                     </li>
 
-                                    <li class="rows">
-                                        <div class="edit">
-                                            <div class="edit_div"><a href="#" class="trans del" title="Delete"><i class="fa fa-times" aria-hidden="true"></i></a><a href="#" class="trans edit_new" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></div>
-                                        </div>
-                                        <div class="pro_name">
-                                            <div class="products">
-                                                <div class="pro_img"><img src="images/cartItem.png" class="absoImg" alt=""></div>
-                                                <div class="pro_descr">
-                                                    <h3 class="pro_title"><a href="#" title="Woah Mama Pizza" class="trans">Deluxe</a></h3>
-                                                    <p class="pro_dtls">original & favorite specialty pizza topped</p>
-                                                    <p class="size"><span class="size">Size :</span>Medium</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="pro_qty">
-                                            <div class="number-input">
+<!--                                    <li class="rows">-->
+<!--                                        <div class="edit">-->
+<!--                                            <div class="edit_div">-->
+<!--                                                <a href="#" class="trans del" title="Delete">-->
+<!--                                                    <i class="fa fa-times" aria-hidden="true"></i>-->
+<!--                                                </a>-->
+<!--                                                <a href="#" class="trans edit_new" title="Edit">-->
+<!--                                                    <i class="fa fa-pencil" aria-hidden="true"></i>-->
+<!--                                                </a></div>-->
+<!--                                        </div>-->
+<!--                                        <div class="pro_name">-->
+<!--                                            <div class="products">-->
+<!--                                                <div class="pro_img"><img src="images/cartItem.png" class="absoImg" alt=""></div>-->
+<!--                                                <div class="pro_descr">-->
+<!--                                                    <h3 class="pro_title"><a href="#" title="Woah Mama Pizza" class="trans">Deluxe</a></h3>-->
+<!--                                                    <p class="pro_dtls">original & favorite specialty pizza topped</p>-->
+<!--                                                    <p class="size"><span class="size">Size :</span>Medium</p>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="pro_qty">-->
+<!--                                            <div class="number-input">-->
 
-                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
-                                                <input class="quantity" min="0" name="quantity" value="1" type="number">
-                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"></button>
+<!--                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>-->
+<!--                                                <input class="quantity" min="0" name="quantity" value="1" type="number">-->
+<!--                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"></button>-->
 
-                                            </div>
-                                        </div>
-                                        <div class="pro_price">
-                                            <h4>$12.00</h4></div>
-                                        <div class="pro_total">
-                                            <h4>$12.00</h4></div>
-                                    </li>
-                                    <li class="rows">
-                                        <div class="edit">
-                                            <div class="edit_div"><a href="#" class="trans del" title="Delete"><i class="fa fa-times" aria-hidden="true"></i></a><a href="#" class="trans edit_new" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></div>
-                                        </div>
-                                        <div class="pro_name">
-                                            <div class="products">
-                                                <div class="pro_img"><img src="images/cartItem.png" class="absoImg" alt=""></div>
-                                                <div class="pro_descr">
-                                                    <h3 class="pro_title"><a href="#" title="Woah Mama Pizza" class="trans">Veggie</a></h3>
-                                                    <p class="pro_dtls">Veggie lovers rejoice! Pizza topped with mushrooms</p>
-                                                    <p class="size"><span class="size">Size :</span>Medium</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="pro_qty">
-                                            <div class="number-input">
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="pro_price">-->
+<!--                                            <h4>$12.00</h4></div>-->
+<!--                                        <div class="pro_total">-->
+<!--                                            <h4>$12.00</h4></div>-->
+<!--                                    </li>-->
+<!--                                    <li class="rows">-->
+<!--                                        <div class="edit">-->
+<!--                                            <div class="edit_div"><a href="#" class="trans del" title="Delete"><i class="fa fa-times" aria-hidden="true"></i></a><a href="#" class="trans edit_new" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></div>-->
+<!--                                        </div>-->
+<!--                                        <div class="pro_name">-->
+<!--                                            <div class="products">-->
+<!--                                                <div class="pro_img"><img src="images/cartItem.png" class="absoImg" alt=""></div>-->
+<!--                                                <div class="pro_descr">-->
+<!--                                                    <h3 class="pro_title"><a href="#" title="Woah Mama Pizza" class="trans">Veggie</a></h3>-->
+<!--                                                    <p class="pro_dtls">Veggie lovers rejoice! Pizza topped with mushrooms</p>-->
+<!--                                                    <p class="size"><span class="size">Size :</span>Medium</p>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="pro_qty">-->
+<!--                                            <div class="number-input">-->
 
-                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
-                                                <input class="quantity" min="0" name="quantity" value="1" type="number">
-                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"></button>
+<!--                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>-->
+<!--                                                <input class="quantity" min="0" name="quantity" value="1" type="number">-->
+<!--                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"></button>-->
 
-                                            </div>
-                                        </div>
-                                        <div class="pro_price">
-                                            <h4>$12.00</h4></div>
-                                        <div class="pro_total">
-                                            <h4>$12.00</h4></div>
-                                    </li>
-                                    <li class="rows">
-                                        <div class="edit">
-                                            <div class="edit_div"><a href="#" class="trans del" title="Delete"><i class="fa fa-times" aria-hidden="true"></i></a><a href="#" class="trans edit_new" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></div>
-                                        </div>
-                                        <div class="pro_name">
-                                            <div class="products">
-                                                <div class="pro_img"><img src="images/cartItem.png" class="absoImg" alt=""></div>
-                                                <div class="pro_descr">
-                                                    <h3 class="pro_title"><a href="#" title="Woah Mama Pizza" class="trans">Barbecue Chicken</a></h3>
-                                                    <p class="pro_dtls">Tangy, rich, our homemade BBQ Chicken pizza</p>
-                                                    <p class="size"><span class="size">Size :</span>Medium</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="pro_qty">
-                                            <div class="number-input">
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="pro_price">-->
+<!--                                            <h4>$12.00</h4></div>-->
+<!--                                        <div class="pro_total">-->
+<!--                                            <h4>$12.00</h4></div>-->
+<!--                                    </li>-->
+<!--                                    <li class="rows">-->
+<!--                                        <div class="edit">-->
+<!--                                            <div class="edit_div"><a href="#" class="trans del" title="Delete"><i class="fa fa-times" aria-hidden="true"></i></a><a href="#" class="trans edit_new" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></div>-->
+<!--                                        </div>-->
+<!--                                        <div class="pro_name">-->
+<!--                                            <div class="products">-->
+<!--                                                <div class="pro_img"><img src="images/cartItem.png" class="absoImg" alt=""></div>-->
+<!--                                                <div class="pro_descr">-->
+<!--                                                    <h3 class="pro_title"><a href="#" title="Woah Mama Pizza" class="trans">Barbecue Chicken</a></h3>-->
+<!--                                                    <p class="pro_dtls">Tangy, rich, our homemade BBQ Chicken pizza</p>-->
+<!--                                                    <p class="size"><span class="size">Size :</span>Medium</p>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="pro_qty">-->
+<!--                                            <div class="number-input">-->
 
-                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
-                                                <input class="quantity" min="0" name="quantity" value="1" type="number">
-                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"></button>
+<!--                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>-->
+<!--                                                <input class="quantity" min="0" name="quantity" value="1" type="number">-->
+<!--                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"></button>-->
 
-                                            </div>
-                                        </div>
-                                        <div class="pro_price">
-                                            <h4>$12.00</h4></div>
-                                        <div class="pro_total">
-                                            <h4>$12.00</h4></div>
-                                    </li>
-                                    <li class="rows">
-                                        <div class="edit">
-                                            <div class="edit_div"><a href="#" class="trans del" title="Delete"><i class="fa fa-times" aria-hidden="true"></i></a><a href="#" class="trans edit_new" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></div>
-                                        </div>
-                                        <div class="pro_name">
-                                            <div class="products">
-                                                <div class="pro_img"><img src="images/cartItem.png" class="absoImg" alt=""></div>
-                                                <div class="pro_descr">
-                                                    <h3 class="pro_title"><a href="#" title="Woah Mama Pizza" class="trans">Egg-ceptional</a></h3>
-                                                    <p class="pro_dtls">Enjoy breakfast anytime of the day! Our breakfast pizza</p>
-                                                    <p class="size"><span class="size">Size :</span>Medium</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="pro_qty">
-                                            <div class="number-input">
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="pro_price">-->
+<!--                                            <h4>$12.00</h4></div>-->
+<!--                                        <div class="pro_total">-->
+<!--                                            <h4>$12.00</h4></div>-->
+<!--                                    </li>-->
+<!--                                    <li class="rows">-->
+<!--                                        <div class="edit">-->
+<!--                                            <div class="edit_div"><a href="#" class="trans del" title="Delete"><i class="fa fa-times" aria-hidden="true"></i></a><a href="#" class="trans edit_new" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></div>-->
+<!--                                        </div>-->
+<!--                                        <div class="pro_name">-->
+<!--                                            <div class="products">-->
+<!--                                                <div class="pro_img"><img src="images/cartItem.png" class="absoImg" alt=""></div>-->
+<!--                                                <div class="pro_descr">-->
+<!--                                                    <h3 class="pro_title"><a href="#" title="Woah Mama Pizza" class="trans">Egg-ceptional</a></h3>-->
+<!--                                                    <p class="pro_dtls">Enjoy breakfast anytime of the day! Our breakfast pizza</p>-->
+<!--                                                    <p class="size"><span class="size">Size :</span>Medium</p>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="pro_qty">-->
+<!--                                            <div class="number-input">-->
 
-                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
-                                                <input class="quantity" min="0" name="quantity" value="1" type="number">
-                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"></button>
+<!--                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>-->
+<!--                                                <input class="quantity" min="0" name="quantity" value="1" type="number">-->
+<!--                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"></button>-->
 
-                                            </div>
-                                        </div>
-                                        <div class="pro_price">
-                                            <h4>$12.00</h4></div>
-                                        <div class="pro_total">
-                                            <h4>$12.00</h4></div>
-                                    </li>
-                                    <li class="rows">
-                                        <div class="edit">
-                                            <div class="edit_div"><a href="#" class="trans del" title="Delete"><i class="fa fa-times" aria-hidden="true"></i></a><a href="#" class="trans edit_new" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></div>
-                                        </div>
-                                        <div class="pro_name">
-                                            <div class="products">
-                                                <div class="pro_img"><img src="images/cartItem.png" class="absoImg" alt=""></div>
-                                                <div class="pro_descr">
-                                                    <h3 class="pro_title"><a href="#" title="Woah Mama Pizza" class="trans">lunch Special Pizza</a></h3>
-                                                    <p class="pro_dtls">one-topping pizza and a16 ounce drink Specialties.</p>
-                                                    <p class="size"><span class="size">Size :</span>Medium</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="pro_qty">
-                                            <div class="number-input">
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="pro_price">-->
+<!--                                            <h4>$12.00</h4></div>-->
+<!--                                        <div class="pro_total">-->
+<!--                                            <h4>$12.00</h4></div>-->
+<!--                                    </li>-->
+<!--                                    <li class="rows">-->
+<!--                                        <div class="edit">-->
+<!--                                            <div class="edit_div"><a href="#" class="trans del" title="Delete"><i class="fa fa-times" aria-hidden="true"></i></a><a href="#" class="trans edit_new" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></div>-->
+<!--                                        </div>-->
+<!--                                        <div class="pro_name">-->
+<!--                                            <div class="products">-->
+<!--                                                <div class="pro_img"><img src="images/cartItem.png" class="absoImg" alt=""></div>-->
+<!--                                                <div class="pro_descr">-->
+<!--                                                    <h3 class="pro_title"><a href="#" title="Woah Mama Pizza" class="trans">lunch Special Pizza</a></h3>-->
+<!--                                                    <p class="pro_dtls">one-topping pizza and a16 ounce drink Specialties.</p>-->
+<!--                                                    <p class="size"><span class="size">Size :</span>Medium</p>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="pro_qty">-->
+<!--                                            <div class="number-input">-->
 
-                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
-                                                <input class="quantity" min="0" name="quantity" value="1" type="number">
-                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"></button>
+<!--                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>-->
+<!--                                                <input class="quantity" min="0" name="quantity" value="1" type="number">-->
+<!--                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"></button>-->
 
-                                            </div>
-                                        </div>
-                                        <div class="pro_price">
-                                            <h4>$12.00</h4></div>
-                                        <div class="pro_total">
-                                            <h4>$12.00</h4></div>
-                                    </li>
-                                    <li class="rows">
-                                        <div class="edit">
-                                            <div class="edit_div"><a href="#" class="trans del" title="Delete"><i class="fa fa-times" aria-hidden="true"></i></a><a href="#" class="trans edit_new" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></div>
-                                        </div>
-                                        <div class="pro_name">
-                                            <div class="products">
-                                                <div class="pro_img"><img src="images/cartItem.png" class="absoImg" alt=""></div>
-                                                <div class="pro_descr">
-                                                    <h3 class="pro_title"><a href="#" title="Woah Mama Pizza" class="trans">Tuscan Roma</a></h3>
-                                                    <p class="pro_dtls">Pizza with Roma Tomatoes, Spinach, Alfredo Sauce</p>
-                                                    <p class="size"><span class="size">Size :</span>Medium</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="pro_qty">
-                                            <div class="number-input">
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="pro_price">-->
+<!--                                            <h4>$12.00</h4></div>-->
+<!--                                        <div class="pro_total">-->
+<!--                                            <h4>$12.00</h4></div>-->
+<!--                                    </li>-->
+<!--                                    <li class="rows">-->
+<!--                                        <div class="edit">-->
+<!--                                            <div class="edit_div"><a href="#" class="trans del" title="Delete"><i class="fa fa-times" aria-hidden="true"></i></a><a href="#" class="trans edit_new" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></div>-->
+<!--                                        </div>-->
+<!--                                        <div class="pro_name">-->
+<!--                                            <div class="products">-->
+<!--                                                <div class="pro_img"><img src="images/cartItem.png" class="absoImg" alt=""></div>-->
+<!--                                                <div class="pro_descr">-->
+<!--                                                    <h3 class="pro_title"><a href="#" title="Woah Mama Pizza" class="trans">Tuscan Roma</a></h3>-->
+<!--                                                    <p class="pro_dtls">Pizza with Roma Tomatoes, Spinach, Alfredo Sauce</p>-->
+<!--                                                    <p class="size"><span class="size">Size :</span>Medium</p>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="pro_qty">-->
+<!--                                            <div class="number-input">-->
 
-                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
-                                                <input class="quantity" min="0" name="quantity" value="1" type="number">
-                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"></button>
+<!--                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>-->
+<!--                                                <input class="quantity" min="0" name="quantity" value="1" type="number">-->
+<!--                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"></button>-->
 
-                                            </div>
-                                        </div>
-                                        <div class="pro_price">
-                                            <h4>$12.00</h4></div>
-                                        <div class="pro_total">
-                                            <h4>$12.00</h4></div>
-                                    </li>
-                                    <li class="rows">
-                                        <div class="edit">
-                                            <div class="edit_div"><a href="#" class="trans del" title="Delete"><i class="fa fa-times" aria-hidden="true"></i></a><a href="#" class="trans edit_new" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></div>
-                                        </div>
-                                        <div class="pro_name">
-                                            <div class="products">
-                                                <div class="pro_img"><img src="images/cartItem.png" class="absoImg" alt=""></div>
-                                                <div class="pro_descr">
-                                                    <h3 class="pro_title"><a href="#" title="Woah Mama Pizza" class="trans">Mac & Cheese</a></h3>
-                                                    <p class="pro_dtls">Pizza with Macaroni and Cheese</p>
-                                                    <p class="size"><span class="size">Size :</span>Medium</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="pro_qty">
-                                            <div class="number-input">
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="pro_price">-->
+<!--                                            <h4>$12.00</h4></div>-->
+<!--                                        <div class="pro_total">-->
+<!--                                            <h4>$12.00</h4></div>-->
+<!--                                    </li>-->
+<!--                                    <li class="rows">-->
+<!--                                        <div class="edit">-->
+<!--                                            <div class="edit_div"><a href="#" class="trans del" title="Delete"><i class="fa fa-times" aria-hidden="true"></i></a><a href="#" class="trans edit_new" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></div>-->
+<!--                                        </div>-->
+<!--                                        <div class="pro_name">-->
+<!--                                            <div class="products">-->
+<!--                                                <div class="pro_img"><img src="images/cartItem.png" class="absoImg" alt=""></div>-->
+<!--                                                <div class="pro_descr">-->
+<!--                                                    <h3 class="pro_title"><a href="#" title="Woah Mama Pizza" class="trans">Mac & Cheese</a></h3>-->
+<!--                                                    <p class="pro_dtls">Pizza with Macaroni and Cheese</p>-->
+<!--                                                    <p class="size"><span class="size">Size :</span>Medium</p>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="pro_qty">-->
+<!--                                            <div class="number-input">-->
 
-                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
-                                                <input class="quantity" min="0" name="quantity" value="1" type="number">
-                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"></button>
+<!--                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>-->
+<!--                                                <input class="quantity" min="0" name="quantity" value="1" type="number">-->
+<!--                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"></button>-->
 
-                                            </div>
-                                        </div>
-                                        <div class="pro_price">
-                                            <h4>$12.00</h4></div>
-                                        <div class="pro_total">
-                                            <h4>$12.00</h4></div>
-                                    </li>
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="pro_price">-->
+<!--                                            <h4>$12.00</h4></div>-->
+<!--                                        <div class="pro_total">-->
+<!--                                            <h4>$12.00</h4></div>-->
+<!--                                    </li>-->
 
                                 </ul>
                                 <div class="coupan_block">
@@ -456,6 +463,10 @@
     <script src="js/custome.js" defer></script>
     <script src="js/slick.js" defer></script>
     <script src="js/jquery.validate.min.js" defer></script>
+    <script src="js/menu.generation.js" ></script>
+    <script th:inline="javascript">
+        generateCartList( [[${cart}]] );
+    </script>
 </body>
 
 </html>

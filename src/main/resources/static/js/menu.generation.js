@@ -121,6 +121,7 @@ var cartButton = document.createElement('a');
     cartButton.innerText = 'Add to cart';
     return cartButton;
 }
+
 function createCartSpan(spanClass, text) {
     var span = document.createElement('span');
     span.setAttribute('class', spanClass);
@@ -169,5 +170,60 @@ function generateOrderItem(item, index, array) {
     priceDiv.appendChild(priceSpan);
     orderNum.appendChild(priceDiv);
     listItem.appendChild(orderNum);
+    itemsList.appendChild(listItem);
+}
+
+function createButton(href, refClass, title, iClass) {
+var cartButton = document.createElement('a');
+    cartButton.setAttribute('href', href);
+    cartButton.setAttribute('class',refClass);
+    cartButton.setAttribute('title', title);
+    return cartButton;
+}
+
+function createEditButton(href, refClass, title, iClass) {
+    var cartButton = createButton(href, refClass, title);
+    var actionButton = document.createElement('i');
+    actionButton.setAttribute('class', iClass);
+    actionButton.setAttribute('aria-hidden', 'true');
+    cartButton.appendChild(actionButton);
+    return cartButton;
+}
+
+function generateCartList( cart) {
+    cart.items.forEach(generateCartItem);
+}
+pr
+function generateCartItem(item, index, array) {
+    var itemsList = document.getElementById("cart_items_list");
+    var listItem = document.createElement('li');
+    listItem.setAttribute('class', 'rows');
+    var editItem = createDivWithClass("edit");
+    var editDiv = createDivWithClass("edit_div");
+    var transDel = createEditButton('#', 'trans del', 'Delete', 'fa fa-times');
+    editDiv.appendChild(transDel);
+    var transEdit = createEditButton('#', 'trans edit_new', 'Edit', 'fa fa-pencil');
+    editDiv.appendChild(transEdit);
+    editItem.appendChild(editDiv);
+    listItem.appendChild(editItem);
+    var productItem = createDivWithClass('pro_name');
+    var products = createDivWithClass('products');
+    var imageDiv = createDivWithClass('pro_img');
+    var image = createImage(item.orderItem.cartImageName);
+    imageDiv.appendChild(image);
+    products.appendChild(imageDiv);
+    var productDesc = createDivWithClass('pro_descr');
+    var productTitleH3 = createH3WithClass('pro_title');
+    var itemButton = createButton('#', 'trans', item.orderItem.name);
+    itemButton.innerText = item.orderItem.name;
+    productTitleH3.appendChild(itemButton);
+    productDesc.appendChild(productTitleH3);
+    var descPara = createParagraphWithClass(item.orderItem.description, 'pro_dtls');
+    productDesc.appendChild(descPara);
+    var sizePara = createParagraphWithClass(reportSize(item.size), 'size');
+    productDesc.appendChild(sizePara);
+    products.appendChild(productDesc);
+    productItem.appendChild(products);
+    listItem.appendChild(productItem);
     itemsList.appendChild(listItem);
 }
