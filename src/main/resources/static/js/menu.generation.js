@@ -190,10 +190,25 @@ function createEditButton(href, refClass, title, iClass) {
     return cartButton;
 }
 
+function createOnClickButton(onclickOperation, buttonClass) {
+    var onclickButton = document.createElement('button');
+    onclickButton.setAttribute('onclick', onclickOperation);
+    if (buttonClass != '') {
+        onclickButton.setAttribute('class',buttonClass);
+    }
+    return onclickButton;
+}
+
+function createH4Price(price) {
+    var priceItem = document.createElement('h4');
+    priceItem.innerText = '$' + price;
+    return priceItem;
+}
+
 function generateCartList( cart) {
     cart.items.forEach(generateCartItem);
 }
-pr
+
 function generateCartItem(item, index, array) {
     var itemsList = document.getElementById("cart_items_list");
     var listItem = document.createElement('li');
@@ -225,5 +240,28 @@ function generateCartItem(item, index, array) {
     products.appendChild(productDesc);
     productItem.appendChild(products);
     listItem.appendChild(productItem);
+    var productQuantity = createDivWithClass('pro_qty');
+    var numberInput = createDivWithClass('number-input');
+    var plusButton = createOnClickButton("this.parentNode.querySelector('input[type=number]').stepUp()", 'plus');
+    numberInput.appendChild(plusButton);
+    var quantityInput = document.createElement('input');
+    quantityInput.setAttribute('class', 'quantity');
+    quantityInput.setAttribute('min', '0');
+    quantityInput.setAttribute('name', 'quantity');
+    quantityInput.setAttribute('value', item.numberOrdered);
+    quantityInput.setAttribute('type', 'number');
+    numberInput.appendChild(quantityInput);
+    var minusButton = createOnClickButton("this.parentNode.querySelector('input[type=number]').stepDown()", '');
+    numberInput.appendChild(minusButton);
+    productQuantity.appendChild(numberInput);
+    listItem.appendChild(productQuantity);
+    var productPrice = createDivWithClass('pro_price');
+    var priceH4 = createH4Price(item.orderItem.price);
+    productPrice.appendChild(priceH4);
+    listItem.appendChild(productPrice);
+    var productTotalPrice = createDivWithClass('pro_total');
+    var totalPriceH4 = createH4Price(item.totalPrice);
+    productTotalPrice.appendChild(totalPriceH4);
+    listItem.appendChild(productTotalPrice);
     itemsList.appendChild(listItem);
 }

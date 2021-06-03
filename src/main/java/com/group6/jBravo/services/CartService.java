@@ -36,7 +36,7 @@ public class CartService {
                 new OrderItem("1001", "images/BBQ-Chicken-Flip-02.png", "BBQ-Chicken flip",
                 "Juicy chicken with our BBQ sauce, cheddar cheese, onions, bell peppers, jalapeños, bacon & mozzarella cheese.",
                 "10.00", OrderItem.SANDWICH_CATEGORY, OrderItem.SINGLE_SIZE,"images/cartItem.png"),
-                2, CartItem.SIZE_ONLY, "10.00"));
+                2, CartItem.SIZE_ONLY, "20.00"));
         cart.setItems(listOfItems);
         cart.setTotalCost("30.00");
         cart.setDeliveryMethod(Cart.ORDER_DELIVERY);
