@@ -265,3 +265,11 @@ function generateCartItem(item, index, array) {
     listItem.appendChild(productTotalPrice);
     itemsList.appendChild(listItem);
 }
+
+function generateCartSummary( cart) {
+    var cartSummaryDiv = document.getElementById("cart_summary");
+    var summarySpan = document.createElement('span');
+    summarySpan.setAttribute('class', "Cart_count");
+    summarySpan.innerText = ">Cart : (" + cart.items.length + ") $" + cart.totalCost;
+    cartSummaryDiv.appendChild(summarySpan);
+}
