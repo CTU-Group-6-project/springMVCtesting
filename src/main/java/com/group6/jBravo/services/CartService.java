@@ -8,11 +8,17 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 @Service
 public class CartService {
+
+    @Autowired
+    private ItemService itemService;
+
     Cart cart;
 
     public CartService() {
@@ -50,4 +56,39 @@ public class CartService {
     public Cart getCart() {
         return cart;
     }
+
+    private double doubleFromString(String value) {
+        return (Double.parseDouble(value));
+    }
+    public void addItem(String itemId) {
+        OrderItem orderItemToAdd = itemService.getItemById(itemId);
+        if (orderItemToAdd !=null) {
+            DecimalFormat df = new DecimalFormat("#.00");
+            CartItem cartItem = getItemById(itemId);
+            if (cartItem == null) {
+                cartItem = new CartItem(orderItemToAdd, 1,
+                        CartItem.SIZE_MEDIUM, orderItemToAdd.getPrice());
+            } else {
+                cartItem.setNumberOrdered(cartItem.getNumberOrdered() + 1);
+                cartItem.setTotalPrice(df.format(
+                        doubleFromString(orderItemToAdd.getPrice()) *
+                                cartItem.getNumberOrdered()));
+            }
+
+            cart.setTotalCost(df.format(doubleFromString(cart.getTotalCost()) +
+                    doubleFromString(orderItemToAdd.getPrice())));
+            cart.getItems().add(cartItem);
+        }
+    }
+
+    public CartItem getItemById(String id) {
+
+        Predicate<CartItem> byId = p -> p.getOrderItem().getId().equals(id);
+        return filterItems(byId);
+    }
+
+    public CartItem filterItems(Predicate<CartItem> strategy) {
+        return getCart().getItems().stream().filter(strategy).findFirst().orElse(null);
+    }
+
 }

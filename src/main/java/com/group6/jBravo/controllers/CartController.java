@@ -17,4 +17,12 @@ public class CartController {
         model.addAttribute("cart", cartService.getCart());
         return "cart";
     }
+
+    @GetMapping("/addItem")
+    public String addItem(String itemId) {
+        System.out.println("in add Item");
+        System.out.println("item = " + itemId);
+        cartService.addItem(itemId);
+        return ("redirect:menu.html");
+    }
 }

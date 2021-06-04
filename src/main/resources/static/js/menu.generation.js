@@ -50,7 +50,7 @@ function generateItem(item, index, array) {
     priceItemDiv.innerText = '$'+ item.price;
 
     priceDiv.appendChild(priceItemDiv);
-    priceDiv.appendChild(createCartButton('#'));
+    priceDiv.appendChild(createCartButton('/addItem?itemId='+ item.id));
     descrdiv.appendChild(priceDiv);
     itemBox.appendChild(descrdiv);
 
