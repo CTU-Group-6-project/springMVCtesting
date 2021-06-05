@@ -32,7 +32,7 @@ public class CartService {
                 new OrderItem("1", "images/woahmama.png", "Woah Mama Pizza",
                         "Tender chicken with our Ranch sauce, cheddar cheese, onions, bell peppers, jalapeños, bacon, & mozzarella cheese.",
                         "10.00", OrderItem.PIZZA_CATEGORY, OrderItem.THREE_SIZES,"images/cartItem.png"),
-                1,CartItem.SIZE_EXTRA_LARGE,"10.00"));
+                1,CartItem.SIZE_MEDIUM,"10.00"));
         listOfItems.add(new CartItem(
                 new OrderItem("4001", "images/margarita5.png", "WHO’S TO BLAME",
                         "jBravo Gold Tequila, triple sec and our house margarita blend.",
@@ -60,24 +60,38 @@ public class CartService {
     private double doubleFromString(String value) {
         return (Double.parseDouble(value));
     }
-    public void addItem(String itemId) {
+    public void addItem(String itemId, String size) {
+        String itemSize = CartItem.SIZE_ONLY;
+        if (size.equals(CartItem.SIZE_MEDIUM)) {
+            itemSize = CartItem.SIZE_MEDIUM;
+        } else if (size.equals(CartItem.SIZE_LARGE)) {
+            itemSize = CartItem.SIZE_LARGE;
+        } else if (size.equals(CartItem.SIZE_EXTRA_LARGE)) {
+            itemSize = CartItem.SIZE_EXTRA_LARGE;
+        }
+        System.out.println("order item size = "+ itemSize);
         OrderItem orderItemToAdd = itemService.getItemById(itemId);
         if (orderItemToAdd !=null) {
             DecimalFormat df = new DecimalFormat("#.00");
             CartItem cartItem = getItemById(itemId);
-            if (cartItem == null) {
-                cartItem = new CartItem(orderItemToAdd, 1,
-                        CartItem.SIZE_MEDIUM, orderItemToAdd.getPrice());
-            } else {
+            boolean updateExistingItem = cartItem != null && cartItem.getSize().equals(itemSize);
+            if (updateExistingItem) {
+                System.out.println("changing number of items for " + orderItemToAdd + " to order");
                 cartItem.setNumberOrdered(cartItem.getNumberOrdered() + 1);
                 cartItem.setTotalPrice(df.format(
                         doubleFromString(orderItemToAdd.getPrice()) *
                                 cartItem.getNumberOrdered()));
+            } else {
+                System.out.println("adding new item " + itemId + " to order");
+                cartItem = new CartItem(orderItemToAdd, 1,
+                        itemSize, orderItemToAdd.getPrice());
             }
 
             cart.setTotalCost(df.format(doubleFromString(cart.getTotalCost()) +
                     doubleFromString(orderItemToAdd.getPrice())));
-            cart.getItems().add(cartItem);
+            if (!updateExistingItem) {
+                cart.getItems().add(cartItem);
+            }
         }
     }
 

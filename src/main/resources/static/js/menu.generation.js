@@ -29,17 +29,26 @@ function generateItem(item, index, array) {
     descrdiv.appendChild(descheading);
     descrdiv.appendChild(createParagraphWithClass(item.description, 'PT_dtls' ));
 
+    baseIndex = (index + 1)*10;
+    var priceElementId = 'priceElementId' + baseIndex;
+    var addToCartButtonId = 'addToCartButtonId' + baseIndex;
     if (item.sizes == "threeSizes") {
         var optiondiv = createDivWithClass("PT_optn");
         var radioUnOrderedList = createUlWithClass("PT-radio");
-        baseIndex = (index + 1)*10;
-        var radioListItem = createRadioItem('radio-group-' + baseIndex, 'radio-'+ (baseIndex+1), 'radio-'+ (baseIndex+1), 'Medium', "checked")
+
+        var radioListItem = createRadioItem('radio-group-' + baseIndex, 'radio-'+ (baseIndex+1),
+         'radio-'+ (baseIndex+1), 'Medium', "checked", priceElementId, "mediumSize",
+         addToCartButtonId, item.id);
         radioUnOrderedList.appendChild(radioListItem);
 
-        radioListItem =  createRadioItem('radio-group-' + baseIndex, 'radio-'+ (baseIndex+2), 'radio-'+ (baseIndex+2), 'Large', "")
+        radioListItem =  createRadioItem('radio-group-' + baseIndex, 'radio-'+ (baseIndex+2),
+        'radio-'+ (baseIndex+2), 'Large', "", priceElementId, "largeSize",
+        addToCartButtonId, item.id);
         radioUnOrderedList.appendChild(radioListItem);
 
-        radioListItem =  createRadioItem('radio-group-' + baseIndex, 'radio-'+ (baseIndex+3), 'radio-'+ (baseIndex+3), 'Extra Large', "")
+        radioListItem =  createRadioItem('radio-group-' + baseIndex, 'radio-'+ (baseIndex+3),
+        'radio-'+ (baseIndex+3), 'Extra Large', "", priceElementId, "extraLargeSize",
+         addToCartButtonId, item.id);
         radioUnOrderedList.appendChild(radioListItem);
 
         optiondiv.appendChild(radioUnOrderedList);
@@ -47,16 +56,23 @@ function generateItem(item, index, array) {
     }
     var priceDiv = createDivWithClass("price_block");
     var priceItemDiv = createDivWithClass('price');
+    priceItemDiv.setAttribute('id', priceElementId);
     priceItemDiv.innerText = '$'+ item.price;
 
     priceDiv.appendChild(priceItemDiv);
-    priceDiv.appendChild(createCartButton('/addItem?itemId='+ item.id));
+    var addToCartButton = createCartButton(createAddToCartButtonHref( item.id, "mediumSize"));
+    addToCartButton.setAttribute('id', addToCartButtonId);
+    priceDiv.appendChild(addToCartButton);
     descrdiv.appendChild(priceDiv);
     itemBox.appendChild(descrdiv);
 
     var itemDiv = createDivWithClass("col-lg-4 col-md-6 col-sm-6 col-xs-12");
     itemDiv.appendChild(itemBox);
     itemsRow.appendChild(itemDiv);
+}
+
+function createAddToCartButtonHref(itemId, size) {
+    return '/addItem?itemId='+ itemId + '&' + 'sizeSelect=' + size;
 }
 
 function createElementWithClass(elementType, elementClass) {
@@ -97,12 +113,28 @@ function createH3WithClass(h3Class) {
     return createElementWithClass("h3", h3Class);
 }
 
-function createRadioItem(radioGroup, id, forValue, text, thisIsDefault) {
+function changeSize(priceElementId, size, addToCartButtonId, itemId) {
+    var priceElement = document.getElementById(priceElementId);
+    if (size == 'mediumSize') {
+        priceElement.innerText = "mp";
+    } else if (size == 'largeSize') {
+        priceElement.innerText = "lp";
+    } else if (size == 'extraLargeSize') {
+        priceElement.innerText = "xlp";
+    }
+    var addToCartButton = document.getElementById(addToCartButtonId);
+    addToCartButton.setAttribute('href', createAddToCartButtonHref(itemId, size));
+}
+
+function createRadioItem(radioGroup, id, forValue, text, thisIsDefault,
+priceElementId, size,addToCartButtonId, itemId) {
     var radioListItem = document.createElement("li");
     var radioInput = document.createElement("input");
     radioInput.setAttribute('type', 'radio');
     radioInput.setAttribute('name',radioGroup);
     radioInput.setAttribute('id', id);
+    radioInput.setAttribute('onclick', 'changeSize("' + priceElementId + '","' + size+ '","'  + addToCartButtonId+
+    '","'  + itemId +'")');
     if (thisIsDefault == "checked") {
         radioInput.setAttribute('checked', 'checked');
     }
@@ -130,7 +162,7 @@ function createCartSpan(spanClass, text) {
 }
 
 function reportSize(sizeSelector) {
-    if (sizeSelector != "mediumSize" ) {
+    if (sizeSelector == "mediumSize" ) {
         return "Medium";
     } else if (sizeSelector == "largeSize") {
         return "Large";

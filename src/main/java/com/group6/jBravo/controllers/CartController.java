@@ -19,10 +19,11 @@ public class CartController {
     }
 
     @GetMapping("/addItem")
-    public String addItem(String itemId) {
+    public String addItem(String itemId, String sizeSelect) {
         System.out.println("in add Item");
         System.out.println("item = " + itemId);
-        cartService.addItem(itemId);
+        System.out.println("size = '" + sizeSelect + "'");
+        cartService.addItem(itemId, sizeSelect);
         return ("redirect:menu.html");
     }
 }
