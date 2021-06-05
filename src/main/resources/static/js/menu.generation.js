@@ -38,17 +38,17 @@ function generateItem(item, index, array) {
 
         var radioListItem = createRadioItem('radio-group-' + baseIndex, 'radio-'+ (baseIndex+1),
          'radio-'+ (baseIndex+1), 'Medium', "checked", priceElementId, "mediumSize",
-         addToCartButtonId, item.id);
+         addToCartButtonId, item.id, item.priceSingleOrMedium, item.priceLarge, item.priceExtraLarge);
         radioUnOrderedList.appendChild(radioListItem);
 
         radioListItem =  createRadioItem('radio-group-' + baseIndex, 'radio-'+ (baseIndex+2),
         'radio-'+ (baseIndex+2), 'Large', "", priceElementId, "largeSize",
-        addToCartButtonId, item.id);
+        addToCartButtonId, item.id, item.priceSingleOrMedium, item.priceLarge, item.priceExtraLarge);
         radioUnOrderedList.appendChild(radioListItem);
 
         radioListItem =  createRadioItem('radio-group-' + baseIndex, 'radio-'+ (baseIndex+3),
         'radio-'+ (baseIndex+3), 'Extra Large', "", priceElementId, "extraLargeSize",
-         addToCartButtonId, item.id);
+         addToCartButtonId, item.id, item.priceSingleOrMedium, item.priceLarge, item.priceExtraLarge);
         radioUnOrderedList.appendChild(radioListItem);
 
         optiondiv.appendChild(radioUnOrderedList);
@@ -113,28 +113,29 @@ function createH3WithClass(h3Class) {
     return createElementWithClass("h3", h3Class);
 }
 
-function changeSize(priceElementId, size, addToCartButtonId, itemId) {
+function changeSize(priceElementId, size, addToCartButtonId, itemId, mediumSinglePrice, largePrice, extraLargePrice) {
     var priceElement = document.getElementById(priceElementId);
-    if (size == 'mediumSize') {
-        priceElement.innerText = "mp";
+    if (size == 'mediumSize' || size == 'singleSize') {
+        priceElement.innerText = '$'+ mediumSinglePrice;
     } else if (size == 'largeSize') {
-        priceElement.innerText = "lp";
+        priceElement.innerText = '$'+ largePrice;
     } else if (size == 'extraLargeSize') {
-        priceElement.innerText = "xlp";
+        priceElement.innerText = '$'+ extraLargePrice;
     }
     var addToCartButton = document.getElementById(addToCartButtonId);
     addToCartButton.setAttribute('href', createAddToCartButtonHref(itemId, size));
 }
 
 function createRadioItem(radioGroup, id, forValue, text, thisIsDefault,
-priceElementId, size,addToCartButtonId, itemId) {
+priceElementId, size,addToCartButtonId, itemId,
+mediumSinglePrice, largePrice, extraLargePrice) {
     var radioListItem = document.createElement("li");
     var radioInput = document.createElement("input");
     radioInput.setAttribute('type', 'radio');
     radioInput.setAttribute('name',radioGroup);
     radioInput.setAttribute('id', id);
     radioInput.setAttribute('onclick', 'changeSize("' + priceElementId + '","' + size+ '","'  + addToCartButtonId+
-    '","'  + itemId +'")');
+    '","'  + itemId + '","'  + mediumSinglePrice + '","'  + largePrice + '","'  + extraLargePrice +'")');
     if (thisIsDefault == "checked") {
         radioInput.setAttribute('checked', 'checked');
     }

@@ -22,13 +22,15 @@ public class OrderItem {
     public final static String THREE_SIZES = "threeSizes";
 
     public OrderItem(String id, String imageName, String name, String description, String priceSingleOrMedium,
-                     String category, String sizes, String cartImageName) {
+                     String priceLarge, String priceExtraLarge, String category, String sizes, String cartImageName) {
         super();
         this.id = id;
         this.imageName = imageName;
         this.name = name;
         this.description = description;
         this.priceSingleOrMedium = priceSingleOrMedium;
+        this.priceLarge = priceLarge;
+        this.priceExtraLarge = priceExtraLarge;
         this.category = category;
         this.sizes = sizes;
         this.cartImageName = cartImageName;
@@ -87,5 +89,21 @@ public class OrderItem {
 
     public void setCartImageName(String cartImageName) {
         this.cartImageName = cartImageName;
+    }
+
+    public String getPriceLarge() {
+        return priceLarge;
+    }
+
+    public void setPriceLarge(String priceLarge) {
+        this.priceLarge = priceLarge;
+    }
+
+    public String getPriceExtraLarge() {
+        return priceExtraLarge;
+    }
+
+    public void setPriceExtraLarge(String priceExtraLarge) {
+        this.priceExtraLarge = priceExtraLarge;
     }
 }
