@@ -268,8 +268,16 @@ function generateCartItem(item, index, array) {
 
 function generateCartSummary( cart) {
     var cartSummaryDiv = document.getElementById("cart_summary");
+    var cartButton = document.createElement('a');
+    cartButton.setAttribute('href', "\cart.html");
+    cartButton.setAttribute('title', 'cart');
     var summarySpan = document.createElement('span');
     summarySpan.setAttribute('class', "Cart_count");
-    summarySpan.innerText = ">Cart : (" + cart.items.length + ") $" + cart.totalCost;
-    cartSummaryDiv.appendChild(summarySpan);
+    if (cart != null) {
+        summarySpan.innerText = ">Cart : (" + cart.items.length + ") $" + cart.totalCost;
+    } else {
+        summarySpan.innerText = ">Cart : (0) $0.00";
+    }
+    cartButton.appendChild(summarySpan);
+    cartSummaryDiv.appendChild(cartButton);
 }

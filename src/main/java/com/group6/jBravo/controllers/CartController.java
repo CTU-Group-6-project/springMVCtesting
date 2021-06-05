@@ -11,7 +11,7 @@ public class CartController {
     @Autowired
     private CartService cartService;
 
-    @GetMapping("/cart.html")
+    @GetMapping(value={"/cart.html","cart"})
     public String getCartPage(Model model) {
         System.out.println("in get cart");
         model.addAttribute("cart", cartService.getCart());

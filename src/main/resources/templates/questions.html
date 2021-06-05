@@ -1,4 +1,5 @@
 <!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
@@ -49,9 +50,10 @@
                                             <li><a href="login.html" class="trans">Sign-up</a></li>
                                         </ul>
                                     </div>
-                                    <div class="Cart">
+                                    <div class="Cart" id="cart_summary">
                                         <a href="cart.html" title="Cart">
-                                            <span class="Cart_count">Cart : (0) $00.00</span>
+                                            <!--   This section contains the dynamically generated menu content  -->
+<!--                                            <span class="Cart_count">Cart : (0) $00.00</span>-->
                                             <!-- <i class="fa fa-shopping-cart" aria-hidden="true"></i> -->
                                             <img class="cart_img" src="/images/cart_1.png" alt="cart_1">
                                         </a>
@@ -232,6 +234,10 @@
     <script src="js/custome.js" defer></script>
     <script src="js/slick.js" defer></script>
     <script src="js/jquery.validate.min.js" defer></script>
+    <script src="js/menu.generation.js" ></script>
+    <script th:inline="javascript">
+        generateCartSummary( [[${cart}]] );
+    </script>
     <!-- JS Here -->
 </body>
 
