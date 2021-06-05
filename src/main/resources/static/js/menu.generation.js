@@ -60,7 +60,12 @@ function generateItem(item, index, array) {
     priceItemDiv.innerText = '$'+ item.priceSingleOrMedium;
 
     priceDiv.appendChild(priceItemDiv);
-    var addToCartButton = createCartButton(createAddToCartButtonHref( item.id, "mediumSize"));
+    var addToCartButton;
+    if (item.sizes == "oneSize") {
+        addToCartButton = createCartButton(createAddToCartButtonHref( item.id, "oneSize"));
+    } else {
+        addToCartButton = createCartButton(createAddToCartButtonHref( item.id, "mediumSize"));
+    }
     addToCartButton.setAttribute('id', addToCartButtonId);
     priceDiv.appendChild(addToCartButton);
     descrdiv.appendChild(priceDiv);
@@ -134,7 +139,7 @@ mediumSinglePrice, largePrice, extraLargePrice) {
     radioInput.setAttribute('type', 'radio');
     radioInput.setAttribute('name',radioGroup);
     radioInput.setAttribute('id', id);
-    radioInput.setAttribute('onclick', 'changeSize("' + priceElementId + '","' + size+ '","'  + addToCartButtonId+
+    radioInput.setAttribute('onclick', 'changeSize("' + priceElementId + '","' + size + '","'  + addToCartButtonId+
     '","'  + itemId + '","'  + mediumSinglePrice + '","'  + largePrice + '","'  + extraLargePrice +'")');
     if (thisIsDefault == "checked") {
         radioInput.setAttribute('checked', 'checked');
