@@ -5,7 +5,9 @@ public class OrderItem {
     String imageName;
     String name;
     String description;
-    String price;
+    String priceSingleOrMedium;
+    String priceLarge;
+    String priceExtraLarge;
     String category;
     String sizes;
     String cartImageName;
@@ -19,14 +21,14 @@ public class OrderItem {
     public final static String SINGLE_SIZE = "oneSize";
     public final static String THREE_SIZES = "threeSizes";
 
-    public OrderItem(String id, String imageName, String name, String description, String price,
+    public OrderItem(String id, String imageName, String name, String description, String priceSingleOrMedium,
                      String category, String sizes, String cartImageName) {
         super();
         this.id = id;
         this.imageName = imageName;
         this.name = name;
         this.description = description;
-        this.price = price;
+        this.priceSingleOrMedium = priceSingleOrMedium;
         this.category = category;
         this.sizes = sizes;
         this.cartImageName = cartImageName;
@@ -56,11 +58,11 @@ public class OrderItem {
     public void setDescription(String description) {
         this.description = description;
     }
-    public String getPrice() {
-        return price;
+    public String getPriceSingleOrMedium() {
+        return priceSingleOrMedium;
     }
-    public void setPrice(String price) {
-        this.price = price;
+    public void setPriceSingleOrMedium(String priceSingleOrMedium) {
+        this.priceSingleOrMedium = priceSingleOrMedium;
     }
 
     public String getCategory() {

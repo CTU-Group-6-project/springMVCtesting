@@ -4,8 +4,6 @@ import com.group6.jBravo.models.Cart;
 import com.group6.jBravo.models.CartItem;
 import com.group6.jBravo.models.OrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
@@ -79,16 +77,16 @@ public class CartService {
                 System.out.println("changing number of items for " + orderItemToAdd + " to order");
                 cartItem.setNumberOrdered(cartItem.getNumberOrdered() + 1);
                 cartItem.setTotalPrice(df.format(
-                        doubleFromString(orderItemToAdd.getPrice()) *
+                        doubleFromString(orderItemToAdd.getPriceSingleOrMedium()) *
                                 cartItem.getNumberOrdered()));
             } else {
                 System.out.println("adding new item " + itemId + " to order");
                 cartItem = new CartItem(orderItemToAdd, 1,
-                        itemSize, orderItemToAdd.getPrice());
+                        itemSize, orderItemToAdd.getPriceSingleOrMedium());
             }
 
             cart.setTotalCost(df.format(doubleFromString(cart.getTotalCost()) +
-                    doubleFromString(orderItemToAdd.getPrice())));
+                    doubleFromString(orderItemToAdd.getPriceSingleOrMedium())));
             if (!updateExistingItem) {
                 cart.getItems().add(cartItem);
             }

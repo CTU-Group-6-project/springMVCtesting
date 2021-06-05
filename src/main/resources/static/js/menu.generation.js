@@ -57,7 +57,7 @@ function generateItem(item, index, array) {
     var priceDiv = createDivWithClass("price_block");
     var priceItemDiv = createDivWithClass('price');
     priceItemDiv.setAttribute('id', priceElementId);
-    priceItemDiv.innerText = '$'+ item.price;
+    priceItemDiv.innerText = '$'+ item.priceSingleOrMedium;
 
     priceDiv.appendChild(priceItemDiv);
     var addToCartButton = createCartButton(createAddToCartButtonHref( item.id, "mediumSize"));
