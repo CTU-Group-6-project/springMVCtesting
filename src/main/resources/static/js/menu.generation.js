@@ -118,15 +118,20 @@ function createH3WithClass(h3Class) {
     return createElementWithClass("h3", h3Class);
 }
 
+function priceForSize(size, mediumSinglePrice, largePrice, extraLargePrice) {
+    var price = '$';
+    if (size == 'mediumSize' || size == 'oneSize') {
+        price += mediumSinglePrice;
+    } else if (size == 'largeSize') {
+        price += largePrice;
+    } else if (size == 'extraLargeSize') {
+        price += extraLargePrice;
+    }
+    return price;
+}
 function changeSize(priceElementId, size, addToCartButtonId, itemId, mediumSinglePrice, largePrice, extraLargePrice) {
     var priceElement = document.getElementById(priceElementId);
-    if (size == 'mediumSize' || size == 'singleSize') {
-        priceElement.innerText = '$'+ mediumSinglePrice;
-    } else if (size == 'largeSize') {
-        priceElement.innerText = '$'+ largePrice;
-    } else if (size == 'extraLargeSize') {
-        priceElement.innerText = '$'+ extraLargePrice;
-    }
+    priceElement.innerText = priceForSize(size, mediumSinglePrice, largePrice, extraLargePrice);
     var addToCartButton = document.getElementById(addToCartButtonId);
     addToCartButton.setAttribute('href', createAddToCartButtonHref(itemId, size));
 }
@@ -239,7 +244,7 @@ function createOnClickButton(onclickOperation, buttonClass) {
 
 function createH4Price(price) {
     var priceItem = document.createElement('h4');
-    priceItem.innerText = '$' + price;
+    priceItem.innerText = price;
     return priceItem;
 }
 
@@ -294,7 +299,8 @@ function generateCartItem(item, index, array) {
     productQuantity.appendChild(numberInput);
     listItem.appendChild(productQuantity);
     var productPrice = createDivWithClass('pro_price');
-    var priceH4 = createH4Price(item.orderItem.price);
+    var priceH4 = createH4Price(priceForSize(item.size, item.orderItem.priceSingleOrMedium,
+                        item.orderItem.priceLarge, item.orderItem.priceExtraLarge));
     productPrice.appendChild(priceH4);
     listItem.appendChild(productPrice);
     var productTotalPrice = createDivWithClass('pro_total');
