@@ -25,7 +25,7 @@ public class CartService {
 
     public CartService() {
         cart = createEmptyCart();
-        populateCartForTesting();
+//        populateCartForTesting();
     }
 
     private void populateCartForTesting() {
