@@ -77,14 +77,15 @@ public class HomeController {
 	@GetMapping(value={"/login", "/login.html"})
 	public String showLoginPage(Model model) {
 		System.out.println("In log in page");
-//		User user = new User();
-=//		model.addAttribute("user",user);
+//		com.group6.jBravo.models.User user = new com.group6.jBravo.models.User();
+//		model.addAttribute("user",user);
 //		InMemoryUserDetailsManager inMemoryUserDetailsManager = (InMemoryUserDetailsManager) userDetailsService;
 //		System.out.println("User name = " + user.getUsername());
 //		model.addAttribute("cart", cartService.getCart());
 //		System.out.println(cartService.getCart());
 		return "login";
 	}
+
 }
 //@Controller
 //@RequestMapping("/user")
