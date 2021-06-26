@@ -74,8 +74,11 @@ public class HomeController {
 	@GetMapping(value={"/login", "/login.html"})
 	public String showLoginPage(Model model) {
 		System.out.println("In log in page");
-		model.addAttribute("cart", cartService.getCart());
-		System.out.println(cartService.getCart());
+//		model.addAttribute("user",user);
+//		InMemoryUserDetailsManager inMemoryUserDetailsManager = (InMemoryUserDetailsManager) userDetailsService;
+//		System.out.println("User name = " + user.getUsername());
+//		model.addAttribute("cart", cartService.getCart());
+//		System.out.println(cartService.getCart());
 		return "login";
 	}
 }
