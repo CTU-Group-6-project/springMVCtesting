@@ -1,0 +1,89 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    !-- Footer Section here -->
+    <footer th:fragment="footer">
+        <div class="main_footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="M_footer">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 quick_links">
+                                <div class="title">Quick Links</div>
+                                <div class="main_cnt">
+                                    <ul>
+                                        <li><a href="about.html" class="trans" title="About us">About us</a></li>
+                                        <li><a href="questions.html" class="trans" title="Questions">Questions</a></li>
+                                        <li><a href="contactus.html" class="trans" title="Contacts">Contacts</a></li>
+                                        <li><a href="login.html" class="trans" title="Sign-In">Sign-In</a></li>
+                                        <li><a href="login.html" class="trans" title="Sign-up">Sign-up</a></li>
+                                        <li><a href="terms_conditions.html" class="trans" title="Terms and conditions">Terms and conditions</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12 location">
+                                <div class="title">Our Location</div>
+                                <div class="main_cnt"> <span class="address"><a href="#">Colorado Technical University, North Chestnut Street, Colorado Springs, CO</a></span> <span class="time1">Mon - Fri: 08:00 am - 10:00 pm</span> <span class="time2">Sat - Sun: 10:00 am - 11:00 pm<strong></strong></span> <span class="conact"><a href="tel:855 230 0555">(855) 230-0555</a></span> </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 subscribe">
+                                <div class="title">Subscribe Now!</div>
+                                <div class="main_cnt">
+                                    <p class="sbcr_label">Subscribe for our Whoa Mama newsletter to
+                                        <br> get Daily offers and deals...</p>
+                                    <form method="post" id="subscribeform" action="thank-you.html">
+                                        <div class="sbcrb_input">
+                                            <input type="text" name="subscribeemail" class="form-control" placeholder="Enter your email">
+                                            <button class="subscribebutton send" name="getbutton" type="submit">
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="F_footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="payment"> <span>Payment Options</span> <span class="pay_cards"><img src="images/paymentTypes.png" alt=""></span> </div>
+                        <div class="social">
+                            <ul>
+                                <li><a href="#" class="trans" title="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#" class="trans" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#" class="trans" title="Google Plus"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                                <li><a href="#" class="trans" title="Instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                <li><a href="#" class="trans" title="Pinterest"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <p>© <a href="index.html" class="trans" title="jBravo Pizza">jBravo Pizza</a> <script type="text/javascript">document.write(new Date().getFullYear());</script>, All rights reserved By Mama </p>                </div>
+        </div>
+    </footer>
+
+    <!-- End of Footer Section here -->
+<!--    -->
+<!--    </div>-->
+<!--    &lt;!&ndash; JS Here &ndash;&gt;-->
+<!--    <script src="js/custome.js" defer></script>-->
+<!--    <script src="js/slick.js" defer></script>-->
+<!--    <script src="js/jquery.validate.min.js" defer></script>-->
+<!--    <script src="js/menu.generation.js" ></script>-->
+<!--    <script th:inline="javascript">-->
+<!--            generateCartSummary( [[${cart}]] );-->
+<!--        </script>-->
+<!--    &lt;!&ndash; JS Here &ndash;&gt;-->
+</body>
+</html>
