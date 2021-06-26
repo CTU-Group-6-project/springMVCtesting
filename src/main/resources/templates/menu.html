@@ -3,85 +3,14 @@
 <html lang="en">
 
 <head>
-    <!--/*/ <th:block th:include="jbravoHeader.html :: headerfiles">
+    <!--/*/ <th:block th:replace="jbravoHeader.html :: headerfiles(pitchTitle='Menu')">
            </th:block> /*/-->
 </head>
 
 <body>
-    <div class="wrapper">
-        <!-- Header in body Starts Here -->
 
-        <header id="Header">
-            <!-- Header in body Starts Here -->
-            <div class="main_header inner_page">
-
-            <!--/*/ <th:block th:include="jbravoHeader.html :: beforePitch">
-            </th:block> /*/-->
-
-            <div th:replace="jbravoHeader.html :: mainPitch(pitchTitle='Menu')">
+            <div th:replace="jbravoHeader.html :: bodyHeader(pitchTitle='Menu')">
             </div>
-
-            <!--/*/ <th:block th:include="jbravoHeader.html :: mainNav">
-            </th:block> /*/-->
-
-        </header>
-<!--        <header id="Header">-->
-<!--            <div class="main_header inner_page">-->
-<!--                <div class="top_nav" id="navbar">-->
-<!--                    <div class="container">-->
-<!--                        <div class="row">-->
-<!--                            <div class="col-md-12">-->
-<!--                                <div class="logo">-->
-<!--                                    <a href="index.html" title="jBravo Pizza"><img src="images/jBravo_logo_2.png" alt="jBravo Pizza"></a>-->
-<!--                                </div>-->
-<!--                                <div class="nav_manu">-->
-<!--                                    <div class="Menu_list">-->
-<!--                                        <ul class="menu">-->
-<!--                                            <li><a href="index.html" class="trans hvr-underline-from-left">Home</a></li>-->
-<!--                                            <li><a href="about.html" class="trans">About</a></li>-->
-<!--                                            <li><a href="menu.html" class="trans">Order</a></li>-->
-<!--                                            <li><a href="login.html" class="trans">Sign-In</a></li>-->
-<!--                                            <li><a href="login.html" class="trans">Sign-up</a></li>-->
-<!--                                        </ul>-->
-<!--                                    </div>-->
-<!--                                    <div class="Cart" id="cart_summary">-->
-<!--&lt;!&ndash;                                        <a href="cart.html" title="Cart">&ndash;&gt;-->
-<!--                                            &lt;!&ndash;   This section contains the dynamically generated menu content  &ndash;&gt;-->
-<!--&lt;!&ndash;                                            <span class="Cart_count">Cart : (0) $00.00</span>&ndash;&gt;-->
-<!--                                            &lt;!&ndash; <i class="fa fa-shopping-cart" aria-hidden="true"></i> &ndash;&gt;-->
-<!--&lt;!&ndash;                                            <img class="cart_img" src="/images/cart_1.png" alt="cart_1">&ndash;&gt;-->
-<!--&lt;!&ndash;                                        </a>&ndash;&gt;-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <button id="burger" class="open-main-nav">-->
-<!--                    <span class="burger"></span>-->
-<!--                </button>-->
-<!--                <div class="H_banner">-->
-<!--                    <div class="main_pitch">-->
-<!--                        <h1 class="page_title">Menu</h1>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="device">-->
-<!--                <nav class="main-nav" id="main-nav">-->
-<!--                    <div class="logo">-->
-<!--                        <a href="index.html" title="jBravo Pizza"><img src="images/jBravo_logo_2.png" alt="jBravo Pizza"></a>-->
-<!--                    </div>-->
-<!--                    <ul>-->
-<!--                        <li><a href="index.html">Home</a></li>-->
-<!--                        <li><a href="about.html">About</a></li>-->
-<!--                        <li><a href="menu.html">Order</a></li>-->
-<!--                        <li><a href="login.html">Sign-In</a></li>-->
-<!--                        <li><a href="login.html">Sign-up</a></li>-->
-<!--                    </ul>-->
-<!--                </nav>-->
-<!--            </div>-->
-<!--        </header>-->
-        <!-- Header end Here -->
 
         <!-- breadcum section -->
 
