@@ -4,14 +4,13 @@ import com.group6.jBravo.models.Cart;
 import com.group6.jBravo.models.CartItem;
 import com.group6.jBravo.models.OrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Array;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -21,10 +20,11 @@ public class CartService {
     @Autowired
     private ItemService itemService;
 
-    Cart cart;
+    Map<String,Cart> carts;
 
     public CartService() {
-        cart = createEmptyCart();
+        carts = new HashMap<String, Cart>();
+        carts.put("", createEmptyCart());
 //        populateCartForTesting();
     }
 
@@ -45,10 +45,10 @@ public class CartService {
                 "Juicy chicken with our BBQ sauce, cheddar cheese, onions, bell peppers, jalapeños, bacon & mozzarella cheese.",
                 "10.00", "12.00", "14.00", OrderItem.SANDWICH_CATEGORY, OrderItem.SINGLE_SIZE,"images/cartItem.png"),
                 2, CartItem.SIZE_ONLY, "20.00"));
-        cart.setItems(listOfItems);
-        cart.setTotalCost("30.00");
-        cart.setDeliveryMethod(Cart.ORDER_DELIVERY);
-        cart.setTotalCostWithDelivery("35.00");
+//        cart.setItems(listOfItems);
+//        cart.setTotalCost("30.00");
+//        cart.setDeliveryMethod(Cart.ORDER_DELIVERY);
+//        cart.setTotalCostWithDelivery("35.00");
     }
 
     private Cart createEmptyCart() {
@@ -56,7 +56,24 @@ public class CartService {
     }
 
     public Cart getCart() {
-        return cart;
+        String username = getCartBasedOnUser();
+        return carts.get(username);
+    }
+
+    private String getCartBasedOnUser() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        String username;
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        System.out.println("logged into "+ username);
+        if (!carts.containsKey(username)) {
+            carts.put(username, createEmptyCart());
+        }
+        return username;
     }
 
     private double doubleFromString(String value) {
@@ -105,7 +122,8 @@ public class CartService {
                 cartItem = new CartItem(orderItemToAdd, 1,
                         itemSize, itemPrice);
             }
-
+            String username = getCartBasedOnUser();
+            Cart cart =  carts.get(username);
             cart.setTotalCost(df.format(doubleFromString(cart.getTotalCost()) +
                     doubleFromString(orderItemToAdd.getPriceSingleOrMedium())));
             if (!updateExistingItem) {

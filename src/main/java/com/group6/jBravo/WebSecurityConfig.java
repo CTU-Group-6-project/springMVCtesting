@@ -40,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.formLogin()
 				.loginPage("/login")
 				.permitAll()
-				.successHandler(this::loginSuccessHandler)
+//				.successHandler(this::loginSuccessHandler)
 //				.successHandler(new RefererRedirectionAuthenticationSuccessHandler())
 				.and()
 			.logout()
@@ -54,8 +54,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		response.setStatus(HttpStatus.OK.value());
 		System.out.println("successfully logged in");
-		response.sendRedirect(request.getContextPath());
-		System.out.println("context path = " + request.getContextPath());
+//		response.sendRedirect(request.getContextPath());
+		response.sendRedirect( "/menu.html");
+		System.out.println("context path = '" + request.getContextPath() + "'");
 		System.out.println("remote userid = "  + request.getRemoteUser());
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
