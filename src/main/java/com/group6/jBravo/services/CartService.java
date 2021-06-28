@@ -79,6 +79,7 @@ public class CartService {
     private double doubleFromString(String value) {
         return (Double.parseDouble(value));
     }
+
     public void addItem(String itemId, String size) {
         OrderItem orderItemToAdd = itemService.getItemById(itemId);
         if (orderItemToAdd !=null) {
@@ -128,6 +129,43 @@ public class CartService {
                     doubleFromString(orderItemToAdd.getPriceSingleOrMedium())));
             if (!updateExistingItem) {
                 cart.getItems().add(cartItem);
+            }
+        }
+    }
+
+    public void deleteItem(String itemId, String size) {
+        OrderItem orderItemToRemove = itemService.getItemById(itemId);
+        if (orderItemToRemove !=null) {
+            String itemSize = CartItem.SIZE_ONLY;
+            String itemPrice = orderItemToRemove.getPriceSingleOrMedium();
+            if (size.equals(CartItem.SIZE_MEDIUM)) {
+                itemSize = CartItem.SIZE_MEDIUM;
+                itemPrice = orderItemToRemove.getPriceSingleOrMedium();
+            } else if (size.equals(CartItem.SIZE_LARGE)) {
+                itemSize = CartItem.SIZE_LARGE;
+                itemPrice = orderItemToRemove.getPriceLarge();
+            } else if (size.equals(CartItem.SIZE_EXTRA_LARGE)) {
+                itemSize = CartItem.SIZE_EXTRA_LARGE;
+                itemPrice = orderItemToRemove.getPriceExtraLarge();
+            }
+            System.out.println("order item size = "+ itemSize);
+            System.out.println("order item price = " + itemPrice);
+
+            DecimalFormat df = new DecimalFormat("#.00");
+            List<CartItem> cartItems = getItemById(itemId);
+            CartItem cartItem = null;
+            Iterator<CartItem> cartListIterator = cartItems.iterator();
+            while (cartListIterator.hasNext()) {
+                CartItem cartItemToCheck = cartListIterator.next();
+                System.out.println("cart item size = "+cartItemToCheck.getSize());
+                System.out.println("order item size = " + itemSize);
+                if (cartItemToCheck.getSize().equals(itemSize)) {
+                    cartItem = cartItemToCheck;
+                    break;
+                }
+            }
+            if (cartItem !=null) {
+                getCart().getItems().remove(cartItem);
             }
         }
     }

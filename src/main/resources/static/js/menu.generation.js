@@ -80,6 +80,10 @@ function createAddToCartButtonHref(itemId, size) {
     return '/addItem?itemId='+ itemId + '&' + 'sizeSelect=' + size;
 }
 
+function createDeleteFromCartButtonHref(itemId, size) {
+    return '/deleteItem?itemId='+ itemId+ '&' + 'sizeSelect=' + size;
+}
+
 function createElementWithClass(elementType, elementClass) {
     var divItem = document.createElement(elementType);
     divItem.setAttribute('class', elementClass);
@@ -253,15 +257,17 @@ function generateCartList( cart) {
 }
 
 function generateCartItem(item, index, array) {
+//    baseIndex = (index + 1)*10;
+//    var deleteFromCartButtonId = 'deleteFromCartButtonId' + baseIndex;
     var itemsList = document.getElementById("cart_items_list");
     var listItem = document.createElement('li');
     listItem.setAttribute('class', 'rows');
     var editItem = createDivWithClass("edit");
     var editDiv = createDivWithClass("edit_div");
-    var transDel = createEditButton('#', 'trans del', 'Delete', 'fa fa-times');
+    var transDel = createEditButton(createDeleteFromCartButtonHref(item.orderItem.id, item.size), 'trans del', 'Delete', 'fa fa-times');
     editDiv.appendChild(transDel);
-    var transEdit = createEditButton('#', 'trans edit_new', 'Edit', 'fa fa-pencil');
-    editDiv.appendChild(transEdit);
+//    var transEdit = createEditButton('#', 'trans edit_new', 'Edit', 'fa fa-pencil');
+//    editDiv.appendChild(transEdit);
     editItem.appendChild(editDiv);
     listItem.appendChild(editItem);
     var productItem = createDivWithClass('pro_name');

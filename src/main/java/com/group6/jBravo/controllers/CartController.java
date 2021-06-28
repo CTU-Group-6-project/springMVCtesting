@@ -26,4 +26,14 @@ public class CartController {
         cartService.addItem(itemId, sizeSelect);
         return ("redirect:menu.html");
     }
+
+    @GetMapping("/deleteItem")
+    public String deleteItem(String itemId, String sizeSelect) {
+        System.out.println("in delete Item");
+        System.out.println("item = " + itemId);
+        System.out.println("size = '" + sizeSelect + "'");
+        cartService.deleteItem(itemId, sizeSelect);
+        return ("redirect:cart.html");
+    }
+
 }
