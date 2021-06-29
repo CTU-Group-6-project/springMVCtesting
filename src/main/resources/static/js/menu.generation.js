@@ -245,37 +245,19 @@ function createEditButton(href, refClass, title, iClass) {
     return cartButton;
 }
 
-function createOnClickButton(onclickOperation, buttonClass) {
-    var onclickButton = document.createElement('button');
-//    onclickButton.setAttribute("href",createDeleteFromCartButtonHref(item.orderItem.id, item.size),;
-    onclickButton.setAttribute('onclick', onclickOperation);
-    if (buttonClass != '') {
-        onclickButton.setAttribute('class',buttonClass);
-    }
-    return onclickButton;
-}
-
 function createIncrementButton(buttonClass, item) {
 var cartButton = document.createElement('a');
     cartButton.setAttribute('href', createIncrementCartButtonHref(item.orderItem.id, item.size));
-//    cartButton.setAttribute('title', '+');
     cartButton.innerText = '+';
      if (buttonClass != '') {
             cartButton.setAttribute('class',buttonClass);
         }
     return cartButton;
-//    var onclickButton = document.createElement('button');
-//    onclickButton.setAttribute('href',createIncrementCartButtonHref(item.orderItem.id, item.size));
-//    if (buttonClass != '') {
-//        onclickButton.setAttribute('class',buttonClass);
-//    }
-//    return onclickButton;
 }
 
 function createDecrementButton(buttonClass, item) {
 var cartButton = document.createElement('a');
     cartButton.setAttribute('href', createDecrementCartButtonHref(item.orderItem.id, item.size));
-//    cartButton.setAttribute('title', '+');
     cartButton.innerText = '-';
      if (buttonClass != '') {
             cartButton.setAttribute('class',buttonClass);
@@ -293,8 +275,6 @@ function generateCartList( cart) {
 }
 
 function generateCartItem(item, index, array) {
-//    baseIndex = (index + 1)*10;
-//    var deleteFromCartButtonId = 'deleteFromCartButtonId' + baseIndex;
     var itemsList = document.getElementById("cart_items_list");
     var listItem = document.createElement('li');
     listItem.setAttribute('class', 'rows');
@@ -302,8 +282,6 @@ function generateCartItem(item, index, array) {
     var editDiv = createDivWithClass("edit_div");
     var transDel = createEditButton(createDeleteFromCartButtonHref(item.orderItem.id, item.size), 'trans del', 'Delete', 'fa fa-times');
     editDiv.appendChild(transDel);
-//    var transEdit = createEditButton('#', 'trans edit_new', 'Edit', 'fa fa-pencil');
-//    editDiv.appendChild(transEdit);
     editItem.appendChild(editDiv);
     listItem.appendChild(editItem);
     var productItem = createDivWithClass('pro_name');
@@ -337,7 +315,6 @@ function generateCartItem(item, index, array) {
     quantityInput.setAttribute('type', 'number');
     numberInput.appendChild(quantityInput);
     var minusButton = createDecrementButton('', item)
-//    var minusButton = createOnClickButton("this.parentNode.querySelector('input[type=number]').stepDown()", '');
     numberInput.appendChild(minusButton);
     productQuantity.appendChild(numberInput);
     listItem.appendChild(productQuantity);
