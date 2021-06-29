@@ -22,6 +22,9 @@ public class CartService {
 
     Map<String,Cart> carts;
 
+    private  DecimalFormat df = new DecimalFormat("#.00");
+
+
     public CartService() {
         carts = new HashMap<String, Cart>();
         carts.put("", createEmptyCart());
@@ -83,34 +86,12 @@ public class CartService {
     public void addItem(String itemId, String size) {
         OrderItem orderItemToAdd = itemService.getItemById(itemId);
         if (orderItemToAdd !=null) {
-            String itemSize = CartItem.SIZE_ONLY;
-            String itemPrice = orderItemToAdd.getPriceSingleOrMedium();
-            if (size.equals(CartItem.SIZE_MEDIUM)) {
-                itemSize = CartItem.SIZE_MEDIUM;
-                itemPrice = orderItemToAdd.getPriceSingleOrMedium();
-            } else if (size.equals(CartItem.SIZE_LARGE)) {
-                itemSize = CartItem.SIZE_LARGE;
-                itemPrice = orderItemToAdd.getPriceLarge();
-            } else if (size.equals(CartItem.SIZE_EXTRA_LARGE)) {
-                itemSize = CartItem.SIZE_EXTRA_LARGE;
-                itemPrice = orderItemToAdd.getPriceExtraLarge();
-            }
+            String itemSize = validateSizeSelection(size);
+            String itemPrice = getPriceFromSize(orderItemToAdd, itemSize);
             System.out.println("order item size = "+ itemSize);
             System.out.println("order item price = " + itemPrice);
 
-            DecimalFormat df = new DecimalFormat("#.00");
-            List<CartItem> cartItems = getItemById(itemId);
-            CartItem cartItem = null;
-            Iterator<CartItem> cartListIterator = cartItems.iterator();
-            while (cartListIterator.hasNext()) {
-                CartItem cartItemToCheck = cartListIterator.next();
-                System.out.println("cart item size = "+cartItemToCheck.getSize());
-                System.out.println("order item size = " + itemSize);
-                if (cartItemToCheck.getSize().equals(itemSize)) {
-                    cartItem = cartItemToCheck;
-                    break;
-                }
-            }
+            CartItem cartItem = getCartItemReference(itemId, itemSize);
             boolean updateExistingItem = cartItem != null;
             if (updateExistingItem) {
                 System.out.println("changing number of items for " + orderItemToAdd + " to order");
@@ -123,49 +104,130 @@ public class CartService {
                 cartItem = new CartItem(orderItemToAdd, 1,
                         itemSize, itemPrice);
             }
-            String username = getCartBasedOnUser();
-            Cart cart =  carts.get(username);
-            cart.setTotalCost(df.format(doubleFromString(cart.getTotalCost()) +
-                    doubleFromString(orderItemToAdd.getPriceSingleOrMedium())));
+            adjustTotalPriceInCart(itemPrice, true);
             if (!updateExistingItem) {
+                String username = getCartBasedOnUser();
+                Cart cart =  carts.get(username);
                 cart.getItems().add(cartItem);
             }
         }
     }
 
+    private CartItem getCartItemReference(String itemId, String itemSize) {
+        List<CartItem> cartItems = getItemById(itemId);
+        CartItem cartItem = null;
+        Iterator<CartItem> cartListIterator = cartItems.iterator();
+        while (cartListIterator.hasNext()) {
+            CartItem cartItemToCheck = cartListIterator.next();
+            System.out.println("cart item size = " + cartItemToCheck.getSize());
+            System.out.println("order item size = " + itemSize);
+            if (cartItemToCheck.getSize().equals(itemSize)) {
+                cartItem = cartItemToCheck;
+                break;
+            }
+        }
+        return cartItem;
+    }
+
+    private String getPriceFromSize(OrderItem orderItemToAdd, String itemSize) {
+        String itemPrice = orderItemToAdd.getPriceSingleOrMedium();
+        if (itemSize.equals(CartItem.SIZE_MEDIUM)) {
+            itemPrice = orderItemToAdd.getPriceSingleOrMedium();
+        } else if (itemSize.equals(CartItem.SIZE_LARGE)) {
+            itemPrice = orderItemToAdd.getPriceLarge();
+        } else if (itemSize.equals(CartItem.SIZE_EXTRA_LARGE)) {
+            itemPrice = orderItemToAdd.getPriceExtraLarge();
+        }
+        return itemPrice;
+    }
+
+    private String validateSizeSelection(String size) {
+        String itemSize = CartItem.SIZE_ONLY;
+        if (size.equals(CartItem.SIZE_MEDIUM)) {
+            itemSize = CartItem.SIZE_MEDIUM;
+        } else if (size.equals(CartItem.SIZE_LARGE)) {
+            itemSize = CartItem.SIZE_LARGE;
+        } else if (size.equals(CartItem.SIZE_EXTRA_LARGE)) {
+            itemSize = CartItem.SIZE_EXTRA_LARGE;
+        }
+        return itemSize;
+    }
+
     public void deleteItem(String itemId, String size) {
         OrderItem orderItemToRemove = itemService.getItemById(itemId);
         if (orderItemToRemove !=null) {
-            String itemSize = CartItem.SIZE_ONLY;
-            String itemPrice = orderItemToRemove.getPriceSingleOrMedium();
-            if (size.equals(CartItem.SIZE_MEDIUM)) {
-                itemSize = CartItem.SIZE_MEDIUM;
-                itemPrice = orderItemToRemove.getPriceSingleOrMedium();
-            } else if (size.equals(CartItem.SIZE_LARGE)) {
-                itemSize = CartItem.SIZE_LARGE;
-                itemPrice = orderItemToRemove.getPriceLarge();
-            } else if (size.equals(CartItem.SIZE_EXTRA_LARGE)) {
-                itemSize = CartItem.SIZE_EXTRA_LARGE;
-                itemPrice = orderItemToRemove.getPriceExtraLarge();
-            }
+            String itemSize = validateSizeSelection(size);
+            String itemPrice = getPriceFromSize(orderItemToRemove, itemSize);
             System.out.println("order item size = "+ itemSize);
             System.out.println("order item price = " + itemPrice);
 
-            DecimalFormat df = new DecimalFormat("#.00");
-            List<CartItem> cartItems = getItemById(itemId);
-            CartItem cartItem = null;
-            Iterator<CartItem> cartListIterator = cartItems.iterator();
-            while (cartListIterator.hasNext()) {
-                CartItem cartItemToCheck = cartListIterator.next();
-                System.out.println("cart item size = "+cartItemToCheck.getSize());
-                System.out.println("order item size = " + itemSize);
-                if (cartItemToCheck.getSize().equals(itemSize)) {
-                    cartItem = cartItemToCheck;
-                    break;
-                }
-            }
+            CartItem cartItem = getCartItemReference(itemId, itemSize);
             if (cartItem !=null) {
                 getCart().getItems().remove(cartItem);
+
+                adjustTotalPriceInCart(itemPrice, false);
+            }
+        }
+    }
+
+    private void adjustTotalPriceInCart(String itemPrice, boolean add) {
+        String username = getCartBasedOnUser();
+        Cart cart =  carts.get(username);
+        double newTotal;
+        if (add) {
+            newTotal = doubleFromString(cart.getTotalCost()) +
+                    doubleFromString(itemPrice);
+        } else {
+            newTotal = doubleFromString(cart.getTotalCost()) -
+                    doubleFromString(itemPrice);
+        }
+        cart.setTotalCost(df.format(newTotal));
+    }
+
+    public void incrementItem(String itemId, String size) {
+        OrderItem orderItemToAdd = itemService.getItemById(itemId);
+        if (orderItemToAdd !=null) {
+            String itemSize = validateSizeSelection(size);
+            String itemPrice = getPriceFromSize(orderItemToAdd, itemSize);
+            System.out.println("order item size = "+ itemSize);
+            System.out.println("order item price = " + itemPrice);
+
+            CartItem cartItem = getCartItemReference(itemId, itemSize);
+            if (cartItem != null) {
+                System.out.println("incrementing number of items for " + orderItemToAdd + " to order");
+                cartItem.setNumberOrdered(cartItem.getNumberOrdered() + 1);
+                cartItem.setTotalPrice(df.format(
+                        doubleFromString(itemPrice) *
+                                cartItem.getNumberOrdered()));
+
+                String username = getCartBasedOnUser();
+                Cart cart =  carts.get(username);
+                cart.setTotalCost(df.format(doubleFromString(cart.getTotalCost()) +
+                        doubleFromString(itemPrice)));
+            }
+        }
+    }
+
+    public void decrementItem(String itemId, String size) {
+        OrderItem orderItemToAdd = itemService.getItemById(itemId);
+        if (orderItemToAdd !=null) {
+            String itemSize = validateSizeSelection(size);
+            String itemPrice = getPriceFromSize(orderItemToAdd, itemSize);
+            System.out.println("order item size = "+ itemSize);
+            System.out.println("order item price = " + itemPrice);
+
+            CartItem cartItem = getCartItemReference(itemId, itemSize);
+            if (cartItem != null) {
+                System.out.println("decrementing number of items for " + orderItemToAdd + " to order");
+                cartItem.setNumberOrdered(cartItem.getNumberOrdered() - 1);
+                if (cartItem.getNumberOrdered() < 1) {
+                    getCart().getItems().remove(cartItem);
+                } else {
+                    cartItem.setTotalPrice(df.format(
+                            doubleFromString(itemPrice) *
+                                    cartItem.getNumberOrdered()));
+                }
+                adjustTotalPriceInCart(itemPrice, false);
             }
         }
     }

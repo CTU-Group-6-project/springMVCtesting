@@ -36,4 +36,21 @@ public class CartController {
         return ("redirect:cart.html");
     }
 
+    @GetMapping("/incrementItem")
+    public String incrementItem(String itemId, String sizeSelect) {
+        System.out.println("in increment Item");
+        System.out.println("item = " + itemId);
+        System.out.println("size = '" + sizeSelect + "'");
+        cartService.incrementItem(itemId, sizeSelect);
+        return ("redirect:cart.html");
+    }
+
+    @GetMapping("/decrementItem")
+    public String decrementItem(String itemId, String sizeSelect) {
+        System.out.println("in decrement Item");
+        System.out.println("item = " + itemId);
+        System.out.println("size = '" + sizeSelect + "'");
+        cartService.decrementItem(itemId, sizeSelect);
+        return ("redirect:cart.html");
+    }
 }

@@ -84,6 +84,14 @@ function createDeleteFromCartButtonHref(itemId, size) {
     return '/deleteItem?itemId='+ itemId+ '&' + 'sizeSelect=' + size;
 }
 
+function createIncrementCartButtonHref(itemId, size) {
+    return '/incrementItem?itemId='+ itemId+ '&' + 'sizeSelect=' + size;
+}
+
+function createDecrementCartButtonHref(itemId, size) {
+    return '/decrementItem?itemId='+ itemId+ '&' + 'sizeSelect=' + size;
+}
+
 function createElementWithClass(elementType, elementClass) {
     var divItem = document.createElement(elementType);
     divItem.setAttribute('class', elementClass);
@@ -239,6 +247,7 @@ function createEditButton(href, refClass, title, iClass) {
 
 function createOnClickButton(onclickOperation, buttonClass) {
     var onclickButton = document.createElement('button');
+//    onclickButton.setAttribute("href",createDeleteFromCartButtonHref(item.orderItem.id, item.size),;
     onclickButton.setAttribute('onclick', onclickOperation);
     if (buttonClass != '') {
         onclickButton.setAttribute('class',buttonClass);
@@ -246,6 +255,33 @@ function createOnClickButton(onclickOperation, buttonClass) {
     return onclickButton;
 }
 
+function createIncrementButton(buttonClass, item) {
+var cartButton = document.createElement('a');
+    cartButton.setAttribute('href', createIncrementCartButtonHref(item.orderItem.id, item.size));
+//    cartButton.setAttribute('title', '+');
+    cartButton.innerText = '+';
+     if (buttonClass != '') {
+            cartButton.setAttribute('class',buttonClass);
+        }
+    return cartButton;
+//    var onclickButton = document.createElement('button');
+//    onclickButton.setAttribute('href',createIncrementCartButtonHref(item.orderItem.id, item.size));
+//    if (buttonClass != '') {
+//        onclickButton.setAttribute('class',buttonClass);
+//    }
+//    return onclickButton;
+}
+
+function createDecrementButton(buttonClass, item) {
+var cartButton = document.createElement('a');
+    cartButton.setAttribute('href', createDecrementCartButtonHref(item.orderItem.id, item.size));
+//    cartButton.setAttribute('title', '+');
+    cartButton.innerText = '-';
+     if (buttonClass != '') {
+            cartButton.setAttribute('class',buttonClass);
+        }
+    return cartButton;
+}
 function createH4Price(price) {
     var priceItem = document.createElement('h4');
     priceItem.innerText = price;
@@ -291,7 +327,7 @@ function generateCartItem(item, index, array) {
     listItem.appendChild(productItem);
     var productQuantity = createDivWithClass('pro_qty');
     var numberInput = createDivWithClass('number-input');
-    var plusButton = createOnClickButton("this.parentNode.querySelector('input[type=number]').stepUp()", 'plus');
+    var plusButton = createIncrementButton( 'plus', item);
     numberInput.appendChild(plusButton);
     var quantityInput = document.createElement('input');
     quantityInput.setAttribute('class', 'quantity');
@@ -300,7 +336,8 @@ function generateCartItem(item, index, array) {
     quantityInput.setAttribute('value', item.numberOrdered);
     quantityInput.setAttribute('type', 'number');
     numberInput.appendChild(quantityInput);
-    var minusButton = createOnClickButton("this.parentNode.querySelector('input[type=number]').stepDown()", '');
+    var minusButton = createDecrementButton('', item)
+//    var minusButton = createOnClickButton("this.parentNode.querySelector('input[type=number]').stepDown()", '');
     numberInput.appendChild(minusButton);
     productQuantity.appendChild(numberInput);
     listItem.appendChild(productQuantity);
