@@ -314,7 +314,7 @@ function generateCartItem(item, index, array) {
     quantityInput.setAttribute('value', item.numberOrdered);
     quantityInput.setAttribute('type', 'number');
     numberInput.appendChild(quantityInput);
-    var minusButton = createDecrementButton('', item)
+    var minusButton = createDecrementButton('minus', item)
     numberInput.appendChild(minusButton);
     productQuantity.appendChild(numberInput);
     listItem.appendChild(productQuantity);
