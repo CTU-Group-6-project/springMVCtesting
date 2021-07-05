@@ -81,7 +81,7 @@
                                 </div>
                                 <div class="checkout">
                                     <p class="order_dscr">Order with Delivery</p>
-                                    <p class="order_total"><span>Total :</span> $156.00</p>
+                                    <p class="order_total" id="orderWithDeliveryTotal"><span >Total :</span></p>
                                     <div class="btn_checkout">
                                         <a href="#" class="trans gray_btn hvr-ripple" title="Update Cart">Update Cart </a>
                                         <a href="checkout.html" class="trans red_btn squre-btn hvr-ripple-out" title="Proceed to Checkout">Proceed to Checkout</a>
@@ -124,6 +124,8 @@
     <script src="js/menu.generation.js" ></script>
     <script th:inline="javascript">
         generateCartList( [[${cart}]] );
+        generateDeliveryButtons( [[${cart}]] );
+        setOrderTotalWithDelivery( [[${cart.TotalCostWithDelivery}]] )
     </script>
 </body>
 

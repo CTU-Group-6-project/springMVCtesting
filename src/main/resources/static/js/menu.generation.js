@@ -270,6 +270,21 @@ function createH4Price(price) {
     return priceItem;
 }
 
+function generateDeliveryButtons( cart ) {
+    if (cart.deliveryMethod == "delivery") {
+        var deliveryRadioButton = document.getElementById("Delivery");
+        deliveryRadioButton.checked = true;
+    } else {
+        var pickupRadioButton = document.getElementById("takeaway");
+        pickupRadioButton.checked = true;
+    }
+}
+
+function setOrderTotalWithDelivery( totalCostWithDelivery ) {
+var orderWithDeliveryTotalParagraph = document.getElementById("orderWithDeliveryTotal");
+orderWithDeliveryTotalParagraph.innerText = "$" + totalCostWithDelivery;
+}
+
 function generateCartList( cart) {
     cart.items.forEach(generateCartItem);
 }
