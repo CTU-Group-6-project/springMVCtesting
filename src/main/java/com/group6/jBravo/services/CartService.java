@@ -176,7 +176,6 @@ public class CartService {
         String username = getCartBasedOnUser();
         Cart cart =  carts.get(username);
         double newTotal;
-        double newTotalWithDelivery;
         if (add) {
             newTotal = doubleFromString(cart.getTotalCost()) +
                     doubleFromString(itemPrice);
@@ -184,11 +183,7 @@ public class CartService {
             newTotal = doubleFromString(cart.getTotalCost()) -
                     doubleFromString(itemPrice);
         }
-        newTotalWithDelivery = newTotal;
-        if (cart.getDeliveryMethod() == Cart.ORDER_DELIVERY) {
-            newTotalWithDelivery = newTotal + FIXED_DELIVERY_COST;
-        }
-        cart.setTotalCostWithDelivery(df.format(newTotalWithDelivery));
+        updateCartTotal(cart, newTotal);
         cart.setTotalCost(df.format(newTotal));
     }
 
@@ -204,16 +199,25 @@ public class CartService {
             if (cartItem != null) {
                 System.out.println("incrementing number of items for " + orderItemToAdd + " to order");
                 cartItem.setNumberOrdered(cartItem.getNumberOrdered() + 1);
-                cartItem.setTotalPrice(df.format(
-                        doubleFromString(itemPrice) *
-                                cartItem.getNumberOrdered()));
-
+                double newTotal = doubleFromString(itemPrice) *
+                        cartItem.getNumberOrdered();
+                cartItem.setTotalPrice(df.format(newTotal));
                 String username = getCartBasedOnUser();
                 Cart cart =  carts.get(username);
+                updateCartTotal(cart, newTotal);
+
                 cart.setTotalCost(df.format(doubleFromString(cart.getTotalCost()) +
                         doubleFromString(itemPrice)));
             }
         }
+    }
+
+    private void updateCartTotal(Cart cart, double newTotal) {
+        double newTotalWithDelivery = newTotal;
+        if (cart.getDeliveryMethod() == Cart.ORDER_DELIVERY) {
+            newTotalWithDelivery = newTotal + FIXED_DELIVERY_COST;
+        }
+        cart.setTotalCostWithDelivery(df.format(newTotalWithDelivery));
     }
 
     public void decrementItem(String itemId, String size) {
