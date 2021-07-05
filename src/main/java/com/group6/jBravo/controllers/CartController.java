@@ -53,4 +53,12 @@ public class CartController {
         cartService.decrementItem(itemId, sizeSelect);
         return ("redirect:cart.html");
     }
+
+    @GetMapping("/setdelivery")
+    public String setDelivery(String deliver_type) {
+        System.out.println("in set delivery");
+        System.out.println("delivery selected = " + deliver_type);
+        cartService.setDeliveryOption(deliver_type);
+        return ("redirect:cart.html");
+    }
 }

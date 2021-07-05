@@ -24,7 +24,7 @@ public class CartService {
 
     Map<String,Cart> carts;
 
-    private  DecimalFormat df = new DecimalFormat("#.00");
+    private  DecimalFormat df = new DecimalFormat("#0.00");
 
 
     public CartService() {
@@ -214,7 +214,7 @@ public class CartService {
 
     private void updateCartTotal(Cart cart, double newTotal) {
         double newTotalWithDelivery = newTotal;
-        if (cart.getDeliveryMethod() == Cart.ORDER_DELIVERY) {
+        if (cart.getDeliveryMethod().equals(Cart.ORDER_DELIVERY)) {
             newTotalWithDelivery = newTotal + FIXED_DELIVERY_COST;
         }
         cart.setTotalCostWithDelivery(df.format(newTotalWithDelivery));
@@ -254,4 +254,14 @@ public class CartService {
         return getCart().getItems().stream().filter(strategy).collect(Collectors.toList());
     }
 
+    public void setDeliveryOption(String deliveryOption) {
+        String username = getCartBasedOnUser();
+        Cart cart =  carts.get(username);
+        if (deliveryOption.equals(Cart.ORDER_DELIVERY) ||
+            deliveryOption.equals(Cart.ORDER_PICKUP)) {
+            cart.setDeliveryMethod(deliveryOption);
+            double newTotal = doubleFromString(cart.getTotalCost());
+            updateCartTotal(cart, newTotal);
+        }
+    }
 }

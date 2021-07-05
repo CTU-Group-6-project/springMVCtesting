@@ -65,19 +65,21 @@
                                             <!-- <input type="submit" value="Apply Coupon" class="send trans"> -->
                                         </div>
                                     </form>
-                                    <div class="Redio_diltype">
-                                        <ul>
-                                            <li>
+                                    <form action="/setdelivery" id="deliveryForm" method="get">
+                                        <div class="Redio_diltype">
+                                            <ul>
+                                                <li>
 
-                                                <input type="radio" id="Delivery" name="deliver_type" value="male" checked>
-                                                <label for="Delivery">Delivery</label>
-                                            </li>
-                                            <li>
-                                                <input type="radio" id="takeaway" name="deliver_type" value="female">
-                                                <label for="takeaway">Take Away</label>
-                                            </li>
+                                                    <input type="radio" id="Delivery" name="deliver_type" value="delivery" onclick="this.form.submit()" checked>
+                                                    <label for="Delivery">Delivery</label>
+                                                </li>
+                                                <li>
+                                                    <input type="radio" id="takeaway" name="deliver_type" value="pickup" onclick="this.form.submit()">
+                                                    <label for="takeaway">Take Away</label>
+                                                </li>
                                         </ul>
                                     </div>
+                                </form>
                                 </div>
                                 <div class="checkout">
                                     <p class="order_dscr">Order with Delivery</p>
