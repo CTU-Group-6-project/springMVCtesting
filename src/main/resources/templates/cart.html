@@ -125,7 +125,7 @@
     <script src="js/jquery.validate.min.js" defer></script>
     <script src="js/menu.generation.js" ></script>
     <script th:inline="javascript">
-         ( [[${cart}]] );
+        generateCartList( [[${cart}]] );
         generateDeliveryButtons( [[${cart}]] );
         setOrderTotalWithDelivery( [[${cart.TotalCostWithDelivery}]] )
     </script>
