@@ -17,8 +17,6 @@ import java.util.stream.Collectors;
 @Service
 public class CartService {
 
-    public static final Double FIXED_DELIVERY_COST = 30.00;
-
     @Autowired
     private ItemService itemService;
 
@@ -215,7 +213,7 @@ public class CartService {
     private void updateCartTotal(Cart cart, double newTotal) {
         double newTotalWithDelivery = newTotal;
         if (cart.getDeliveryMethod().equals(Cart.ORDER_DELIVERY)) {
-            newTotalWithDelivery = newTotal + FIXED_DELIVERY_COST;
+            newTotalWithDelivery = newTotal + doubleFromString(cart.getDeliveryCost());
         }
         cart.setTotalCostWithDelivery(df.format(newTotalWithDelivery));
     }

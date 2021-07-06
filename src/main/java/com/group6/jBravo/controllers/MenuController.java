@@ -25,6 +25,13 @@ public class MenuController {
         return "menu";
     }
 
+    @GetMapping("/checkout.html")
+    public String getCheckoutPage(Model model) {
+        System.out.println("in checkout menu");
+        model.addAttribute("cart", cartService.getCart());
+        return "checkout";
+    }
+
 //    @GetMapping("/{itemId}")
 //    public String getProductById(Model model, @PathVariable("itemId") String itemId) {
 //

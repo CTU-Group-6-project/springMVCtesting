@@ -204,7 +204,7 @@ function generateYourOrder(cart) {
 
 function generateYourOrderPrice(totalPrice) {
     var priceDiv = document.getElementById("your_order_total_div");
-    var totalPriceSpan = createCartSpan("O_price", totalPrice);
+    var totalPriceSpan = createCartSpan("O_price", "$" + totalPrice);
     priceDiv.appendChild(totalPriceSpan);
 }
 
@@ -221,7 +221,7 @@ function generateOrderItem(item, index, array) {
     }
     orderNum.appendChild(orderNames);
     var priceDiv = createDivWithClass("Order_price");
-    var priceSpan = createCartSpan("O_price", item.totalPrice);
+    var priceSpan = createCartSpan("O_price", "$" + item.totalPrice);
     priceDiv.appendChild(priceSpan);
     orderNum.appendChild(priceDiv);
     listItem.appendChild(orderNum);
@@ -281,8 +281,17 @@ function generateDeliveryButtons( cart ) {
 }
 
 function setOrderTotalWithDelivery( totalCostWithDelivery ) {
-var orderWithDeliveryTotalParagraph = document.getElementById("orderWithDeliveryTotal");
-orderWithDeliveryTotalParagraph.innerText = "$" + totalCostWithDelivery;
+    var orderWithDeliveryTotalParagraph = document.getElementById("orderWithDeliveryTotal");
+    orderWithDeliveryTotalParagraph.innerText = "$" + totalCostWithDelivery;
+}
+
+function setOrderDeliveryCost(cart) {
+    var deliveryCostElement = document.getElementById("orderWithDeliveryTotalParagraph");
+    if (cart.deliveryMethod == "delivery") {
+        deliveryCostElement.innerText = "$" + cart.deliveryCost;
+    } else {
+        deliveryCostElement.innerText = "--";
+    }
 }
 
 function generateCartList( cart) {
@@ -339,7 +348,7 @@ function generateCartItem(item, index, array) {
     productPrice.appendChild(priceH4);
     listItem.appendChild(productPrice);
     var productTotalPrice = createDivWithClass('pro_total');
-    var totalPriceH4 = createH4Price(item.totalPrice);
+    var totalPriceH4 = createH4Price("$" + item.totalPrice);
     productTotalPrice.appendChild(totalPriceH4);
     listItem.appendChild(productTotalPrice);
     itemsList.appendChild(listItem);

@@ -6,11 +6,13 @@ public class Cart {
 
     public static final String ORDER_DELIVERY = "delivery";
     public static final String ORDER_PICKUP = "pickup";
+    public static final String FIXED_DELIVERY_COST = "30.00";
 
     String couponCode;
     String deliveryMethod;
     String totalCost;
     String totalCostWithDelivery;
+    String deliveryCost;
 
     List<CartItem> items;
 
@@ -20,6 +22,7 @@ public class Cart {
         this.totalCost = totalCost;
         this.totalCostWithDelivery = totalCostWithDelivery;
         this.items = items;
+        this.deliveryCost = FIXED_DELIVERY_COST;
     }
 
     public List<CartItem> getItems() {
@@ -60,5 +63,13 @@ public class Cart {
 
     public void setTotalCostWithDelivery(String totalCostWithDelivery) {
         this.totalCostWithDelivery = totalCostWithDelivery;
+    }
+
+    public void setDeliveryCost(String deliveryCost) {
+        this.deliveryCost = deliveryCost;
+    }
+
+    public String getDeliveryCost() {
+        return deliveryCost;
     }
 }
