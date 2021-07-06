@@ -63,9 +63,11 @@ public class CartController {
         return ("redirect:cart.html");
     }
 
-//    @PostMapping("/thank-you.html")
-//    public String placeOrderThankyou(@ModelAttribute Greeting greeting, Model model) {
-//        System.out.println("in place order thank-you");
-//        return "thank-you";
-//    }
+    @GetMapping("/thank-you.html")
+    public String placeOrderThankyou(String firstname, String lastname) {
+        System.out.println("in place order thank-you");
+        System.out.println("name entered = " + firstname + " " + lastname);
+        cartService.clearUserCart();
+        return "thank-you";
+    }
 }

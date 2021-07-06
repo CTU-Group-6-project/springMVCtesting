@@ -79,6 +79,11 @@ public class CartService {
         return username;
     }
 
+    public void clearUserCart() {
+        String username = getCartBasedOnUser();
+        carts.put(username, createEmptyCart());
+    }
+
     private double doubleFromString(String value) {
         return (Double.parseDouble(value));
     }
