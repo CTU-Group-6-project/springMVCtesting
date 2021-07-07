@@ -1,10 +1,12 @@
 package com.group6.jBravo.controllers;
 
+import com.group6.jBravo.models.ThankYouInfo;
 import com.group6.jBravo.services.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -63,10 +65,12 @@ public class CartController {
         return ("redirect:cart.html");
     }
 
-    @GetMapping("/thank-you.html")
-    public String placeOrderThankyou(String firstname, String lastname) {
+    @PostMapping("/thank-you.html")
+    public String placeOrderThankyou(@ModelAttribute ThankYouInfo thankYouInfo, Model model) {
         System.out.println("in place order thank-you");
-        System.out.println("name entered = " + firstname + " " + lastname);
+        model.addAttribute("thankYouInfo", thankYouInfo);
+        System.out.println("comment name entered = " + thankYouInfo.getFname() + " " + thankYouInfo.getLname());
+        System.out.println("order name entered = " + thankYouInfo.getFirstname() + " " + thankYouInfo.getLastname());
         cartService.clearUserCart();
         return "thank-you";
     }
