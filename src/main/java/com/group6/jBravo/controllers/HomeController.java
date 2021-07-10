@@ -27,17 +27,17 @@ public class HomeController {
 		System.out.println("In Home page");
 		model.addAttribute("cart", cartService.getCart());
 		System.out.println(cartService.getCart());
-		InMemoryUserDetailsManager inMemoryUserDetailsManager = (InMemoryUserDetailsManager) userDetailsService;
-		UserDetails user =
-				 User.withDefaultPasswordEncoder()
-					.username("paul@work.com")
-					.password("password1234")
-					.roles("MANAGER")
-					.build();
-		if (!inMemoryUserDetailsManager.userExists("paul@work.com")) {
-			System.out.println("added paul@work.com");
-			inMemoryUserDetailsManager.createUser(user);
-		}
+//		InMemoryUserDetailsManager inMemoryUserDetailsManager = (InMemoryUserDetailsManager) userDetailsService;
+//		UserDetails user =
+//				 User.withDefaultPasswordEncoder()
+//					.username("paul@work.com")
+//					.password("password1234")
+//					.roles("MANAGER")
+//					.build();
+//		if (!inMemoryUserDetailsManager.userExists("paul@work.com")) {
+//			System.out.println("added paul@work.com");
+//			inMemoryUserDetailsManager.createUser(user);
+//		}
 		return "index";
 	}
 
