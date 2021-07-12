@@ -1,10 +1,10 @@
 package com.group6.jBravo.services;
 
+import com.group6.jBravo.WebSecurityConfig;
 import com.group6.jBravo.models.OrderItem;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Service;
 
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +17,6 @@ public class ItemService {
     public static final String QUOTE_COMMAND_QUOTE_SEPARATOR = "', '";
     public static final String END_QUOTE = "');";
 
-    //    @Autowired
-//    @Qualifier("webconfigSource")
     private DriverManagerDataSource dataSource;
 
     Connection c = null;
@@ -29,10 +27,10 @@ public class ItemService {
 
     public ItemService() throws SQLException {
         dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/jbravo");
-        dataSource.setUsername("postgres");
-        dataSource.setPassword("plSTmg11pg");
+        dataSource.setDriverClassName(WebSecurityConfig.JBDC_DRIVER);
+        dataSource.setUrl(WebSecurityConfig.JBDC_URL);
+        dataSource.setUsername(WebSecurityConfig.JBDC_USERNAME);
+        dataSource.setPassword(WebSecurityConfig.JBDC_PASSWORD);
         createInitialMenuInDbIfNeeded();
         if (menuItems == null) {
             readMenuItemsFromDb();

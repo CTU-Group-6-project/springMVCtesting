@@ -1,6 +1,7 @@
 package com.group6.jBravo;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -16,7 +17,6 @@ import java.sql.*;
 
 @Configuration
 @EnableWebSecurity
-
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public static final String CREATE_USERS_TABLE_SQL = "CREATE TABLE users " +
 			"(ID SERIAL PRIMARY KEY," +
@@ -68,8 +68,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public static final String DROP_USERS_TABLE = "DROP TABLE users;";
 	public static final String DROP_AUTHORITIES_TABLE = "DROP TABLE authorities;";
 	public static final String DROP_MENUITEMS_TABLE = "DROP TABLE menuitems;";
+	public static final String JBDC_DRIVER = "org.postgresql.Driver";
+	public static final String JBDC_URL = "jdbc:postgresql://localhost:5432/jbravo";
+	public static final String JBDC_USERNAME = "postgres";
+	public static final String JBDC_PASSWORD = "plSTmg11pg";
 
 	private final ObjectMapper objectMapper = new ObjectMapper();
+
+	@Autowired
+	DataSource dataSource;
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
@@ -89,22 +97,75 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	@Override
-//	public InMemoryUserDetailsManager userDetailsService() {
 		public JdbcDaoImpl userDetailsService() {
+
 		JdbcDaoImpl jdbcDaoImpl = new JdbcDaoImpl();
-		jdbcDaoImpl.setDataSource(dataSource());
+		jdbcDaoImpl.setDataSource(dataSource);
 		jdbcDaoImpl.setUsersByUsernameQuery("select username,password,enabled from users where username = ?");
 		jdbcDaoImpl.setAuthoritiesByUsernameQuery("select username,authority from authorities where username = ?");
-		return jdbcDaoImpl;
+		try {
+//			executeSQL(dataSource, DROP_USERS_TABLE);
+//			executeSQL(dataSource, DROP_AUTHORITIES_TABLE);
+//			executeSQL(dataSource, DROP_MENUITEMS_TABLE);
+			if (!tableExists(dataSource,"users")) {
+				System.out.println("creating users table");
+				if (createTable(dataSource, CREATE_USERS_TABLE_SQL)) {
+					System.out.println("Users table created successfully");
+					if (executeSQL(dataSource, ADD_DEFAULT_USER_TO_USERS_SQL)) {
+						System.out.println("default user added successfully");
+					} else {
+						System.out.println("Error: default user add failed");
+					}
+					if (executeSQL(dataSource, ADD_MANAGER_USER_TO_USERS_SQL)) {
+						System.out.println("manager user added successfully");
+					} else {
+						System.out.println("Error: manager user add failed");
+					}
+				} else {
+					System.out.println("Users table not created");
+				}
 
-//		UserDetails user =
-//			 User.withDefaultPasswordEncoder()
-//				.username("user@home.com")
-//				.password("longpassword")
-//				.roles("USER")
-//				.build();
-//
-//		return new InMemoryUserDetailsManager(user);
+			} else {
+				System.out.println("Users table already exits");
+			}
+			if (!tableExists(dataSource,"authorities")) {
+				System.out.println("creating authoritites table");
+				if (createTable(dataSource, CREATE_AUTHORITIES_TABLE_SQL)) {
+					System.out.println("Authorities table created successfully");
+					if (executeSQL(dataSource, ADD_DEFAULT_AUTHORITY_TO_AUTHORITIES_SQL)) {
+						System.out.println("default authority added successfully");
+					} else {
+						System.out.println("Error: default authority add failed");
+					}
+					if (executeSQL(dataSource, ADD_MANAGER_AUTHORITY_TO_AUTHORITIES_SQL)) {
+						System.out.println("manager authority added successfully");
+					} else {
+						System.out.println("Error: manager authority add failed");
+					}
+				} else {
+					System.out.println("Authorities table not created");
+				}
+			} else {
+				System.out.println("Authorities table already exits");
+			}
+			if (!tableExists(dataSource,"menuitems")) {
+				System.out.println("creating menuitems table");
+
+				if (createTable(dataSource, CREATE_MENUITEMS_TABLE_SQL)) {
+					System.out.println("menuitems table created successfully");
+				} else {
+					System.out.println("menuitems table not created");
+				}
+
+			} else {
+				System.out.println("menuitems table already exits");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println(e.getClass().getName()+": "+e.getMessage());
+			System.exit(0);
+		}
+		return jdbcDaoImpl;
 	}
 
 	private boolean tableExists(DataSource dataSource, String tableName) throws SQLException, SQLException {
@@ -140,75 +201,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Bean
-//	@Qualifier("webconfigSource")
-	public DataSource dataSource() {
+	public DriverManagerDataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("org.postgresql.Driver");
-		dataSource.setUrl("jdbc:postgresql://localhost:5432/jbravo");
-		dataSource.setUsername("postgres");
-		dataSource.setPassword("plSTmg11pg");
-		try {
-//			executeSQL(dataSource, DROP_USERS_TABLE);
-//			executeSQL(dataSource, DROP_AUTHORITIES_TABLE);
-//			executeSQL(dataSource, DROP_MENUITEMS_TABLE);
-			if (!tableExists(dataSource,"users")) {
-				System.out.println("creating users table");
-				if (createTable(dataSource, CREATE_USERS_TABLE_SQL)) {
-					System.out.println("Users table created successfully");
-					if (executeSQL(dataSource, ADD_DEFAULT_USER_TO_USERS_SQL)) {
-						System.out.println("default user added successfully");
-					} else {
-						System.out.println("Error: default user add failed");
-					}
-					if (executeSQL(dataSource, ADD_MANAGER_USER_TO_USERS_SQL)) {
-						System.out.println("manager user added successfully");
-					} else {
-						System.out.println("Error: manager user add failed");
-					}
-				} else {
-					System.out.println("Users table not created");
-				}
-
-			} else {
-				System.out.println("Users table already exits");
-			}
-			if (!tableExists(dataSource,"authorities")) {
-					System.out.println("creating authoritites table");
-				if (createTable(dataSource, CREATE_AUTHORITIES_TABLE_SQL)) {
-					System.out.println("Authorities table created successfully");
-					if (executeSQL(dataSource, ADD_DEFAULT_AUTHORITY_TO_AUTHORITIES_SQL)) {
-						System.out.println("default authority added successfully");
-					} else {
-						System.out.println("Error: default authority add failed");
-					}
-					if (executeSQL(dataSource, ADD_MANAGER_AUTHORITY_TO_AUTHORITIES_SQL)) {
-						System.out.println("manager authority added successfully");
-					} else {
-						System.out.println("Error: manager authority add failed");
-					}
-				} else {
-					System.out.println("Authorities table not created");
-				}
-			} else {
-					System.out.println("Authorities table already exits");
-			}
-			if (!tableExists(dataSource,"menuitems")) {
-				System.out.println("creating menuitems table");
-
-				if (createTable(dataSource, CREATE_MENUITEMS_TABLE_SQL)) {
-					System.out.println("menuitems table created successfully");
-				} else {
-					System.out.println("menuitems table not created");
-				}
-
-			} else {
-				System.out.println("menuitems table already exits");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.err.println(e.getClass().getName()+": "+e.getMessage());
-			System.exit(0);
-		}
+		dataSource.setDriverClassName(JBDC_DRIVER);
+		dataSource.setUrl(JBDC_URL);
+		dataSource.setUsername(JBDC_USERNAME);
+		dataSource.setPassword(JBDC_PASSWORD);
 		System.out.println("Opened database successfully");
 		return dataSource;
 	}
