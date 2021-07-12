@@ -1,8 +1,11 @@
 package com.group6.jBravo.services;
 
 import com.group6.jBravo.models.OrderItem;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Service;
 
+import javax.sql.DataSource;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -10,7 +13,99 @@ import java.util.function.Predicate;
 @Service
 public class ItemService {
 
-    public List<OrderItem> getMenuItems() {
+    public static final String ADD_MENUITEM_TO_MENUITEMS_PREFIX_SQL = "INSERT INTO menuitems (imageName,name,description,priceSingleOrMedium,priceLarge,priceExtraLarge,category,sizes,cartImageName) VALUES ('";
+    public static final String QUOTE_COMMAND_QUOTE_SEPARATOR = "', '";
+    public static final String END_QUOTE = "');";
+
+    //    @Autowired
+//    @Qualifier("webconfigSource")
+    private DriverManagerDataSource dataSource;
+
+    Connection c = null;
+    Statement stmt = null;
+
+
+    List<OrderItem> menuItems;
+
+    public ItemService() throws SQLException {
+        dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName("org.postgresql.Driver");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/jbravo");
+        dataSource.setUsername("postgres");
+        dataSource.setPassword("plSTmg11pg");
+        createInitialMenuInDbIfNeeded();
+        if (menuItems == null) {
+            readMenuItemsFromDb();
+        }
+    }
+
+    private void initDbConnection() throws SQLException {
+        c = dataSource.getConnection();
+        stmt = null;
+
+    }
+
+    private void closeDbConnection() throws SQLException {
+        stmt.close();
+        c.close();
+    }
+
+    private boolean executeSQL(String sql)  {
+        try {
+            stmt = c.createStatement();
+            stmt.executeUpdate(sql);
+        } catch ( Exception e ) {
+            System.err.println ( e.getClass().getName()+": "+ e.getMessage() );
+            return false;
+        }
+        return true;
+    }
+
+    private ResultSet executeSQLWithResult(String sql)  {
+        ResultSet rs = null;
+        try {
+            stmt = c.createStatement();
+            rs = stmt.executeQuery(sql);
+        } catch ( Exception e ) {
+            System.err.println ( e.getClass().getName()+": "+ e.getMessage() );
+        }
+        return rs;
+    }
+
+    private boolean tableEmpty(String tableName) throws SQLException {
+        ResultSet resultSet = executeSQLWithResult("select count(*) C from "+ tableName + ";");
+        if (resultSet.next()) {
+            long v = resultSet.getLong("c");
+            return v == 0l;
+        }
+        return false;
+    }
+
+    private void createInitialMenuInDbIfNeeded() throws SQLException {
+        initDbConnection();
+        if (tableEmpty("menuItems")) {
+            System.out.println("Populating menuitems table with initial values");
+            for (OrderItem orderItem : getInitialMenuItems()) {
+                String sql = ADD_MENUITEM_TO_MENUITEMS_PREFIX_SQL +
+                        orderItem.getImageName() + QUOTE_COMMAND_QUOTE_SEPARATOR +
+                        orderItem.getName() + QUOTE_COMMAND_QUOTE_SEPARATOR +
+                        orderItem.getDescription() + QUOTE_COMMAND_QUOTE_SEPARATOR +
+                        orderItem.getPriceSingleOrMedium() + QUOTE_COMMAND_QUOTE_SEPARATOR +
+                        orderItem.getPriceLarge() + QUOTE_COMMAND_QUOTE_SEPARATOR +
+                        orderItem.getPriceExtraLarge() + QUOTE_COMMAND_QUOTE_SEPARATOR +
+                        orderItem.getCategory() + QUOTE_COMMAND_QUOTE_SEPARATOR +
+                        orderItem.getSizes() + QUOTE_COMMAND_QUOTE_SEPARATOR +
+                        orderItem.getCartImageName() + END_QUOTE;
+                System.out.println(sql);
+                executeSQL(sql);
+            }
+        } else {
+            System.out.println("MenuItems table already populated");
+        }
+        closeDbConnection();
+    }
+
+    private List<OrderItem> getInitialMenuItems() {
 
         List<OrderItem> listOfItems = new ArrayList<>();
         listOfItems.add(new OrderItem("1", "images/woahmama.png", "Woah Mama Pizza",
@@ -109,7 +204,33 @@ public class ItemService {
         return listOfItems;
     }
 
-    public OrderItem getItemById(String id) {
+    private void readMenuItemsFromDb() throws SQLException {
+        initDbConnection();
+        ResultSet resultSet = executeSQLWithResult("select * from menuitems;");
+        List<OrderItem> listOfItems = new ArrayList<>();
+        //    (imageName,name,description,priceSingleOrMedium,priceLarge,priceExtraLarge,category,sizes,cartImageName) VALUES ('";
+        //
+        while (resultSet.next()) {
+            listOfItems.add(new OrderItem(String.valueOf(resultSet.getLong("id")),
+                    resultSet.getString("imageName"),
+                    resultSet.getString("name"),
+                    resultSet.getString("description"),
+                    resultSet.getString("priceSingleOrMedium"),
+                    resultSet.getString("priceLarge"),
+                    resultSet.getString("priceExtraLarge"),
+                    resultSet.getString("category"),
+                    resultSet.getString("sizes"),
+                    resultSet.getString("cartImageName")));
+        }
+        menuItems = listOfItems;
+        closeDbConnection();
+    }
+
+    public List<OrderItem> getMenuItems() {
+        return menuItems;
+    }
+
+        public OrderItem getItemById(String id) {
 
         Predicate<OrderItem> byId = p -> p.getId().equals(id);
         return filterItems(byId);

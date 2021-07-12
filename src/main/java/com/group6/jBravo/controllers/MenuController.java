@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class MenuController {
@@ -31,13 +30,6 @@ public class MenuController {
         model.addAttribute("cart", cartService.getCart());
         return "checkout";
     }
-
-//    @GetMapping("/{itemId}")
-//    public String getProductById(Model model, @PathVariable("itemId") String itemId) {
-//
-////   	  model.addAttribute("item",itemService.getItemById(itemId));
-//        return "item";
-//    }
 
     @GetMapping("/home")
     public String getAllItemshome(Model model) {
