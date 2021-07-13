@@ -1,0 +1,68 @@
+<!--<!doctype html>-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Payment Checkout Form</title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css">
+	<link rel="stylesheet" href="css/styles_pay.css">
+  <link rel="icon" href="images/jbravo_nav_img2.png" sizes="32x32" />
+  <link rel="icon" href="images/jbravo_nav_img2.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="images/jbravo_nav_img2.png" />
+
+
+</head>
+<body>
+	
+
+
+<div class="wrapper">
+  <div class="payment">
+    <div class="payment-logo">
+      <img src="images/jbravo_nav_img.png" style="width:100%" alt="logo">
+    </div>
+    
+    
+    <h2>JBravo Pizza Payment</h2>
+    <div class="form">
+      <form method="post" id="checkoutform" action="#" th:action="@{/pay-thank-you.html}" th:object="${payInfo}">
+        <div class="card space icon-relative">
+          <label class="label">Card holder:</label>
+          <input type="text" class="input" placeholder="Card Holder Name" name="cardholder">
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="card space icon-relative">
+          <label class="label">Card number:</label>
+          <input type="text" class="input" data-mask="0000 0000 0000 0000" placeholder="Card Number" name="cardnumber">
+          <i class="far fa-credit-card"></i>
+        </div>
+        <div class="card-grp space">
+          <div class="card-item icon-relative">
+            <label class="label">Expiry date:</label>
+            <input type="text" class="input" data-mask="00 / 00"  placeholder="00 / 00" name="expdate">
+            <i class="far fa-calendar-alt"></i>
+          </div>
+          <div class="card-item icon-relative">
+            <label class="label">CVC:</label>
+            <input type="text" class="input" data-mask="000" placeholder="000" name="cvc">
+            <i class="fas fa-lock"></i>
+          </div>
+        </div>
+
+        <div>
+          <ul>
+            <li>
+               <button type="submit" class="checkout-btn red_btn trans hvr-float-shadow" name="checkout">Checkout</button>
+            </li>
+          </ul>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+	<script src="js/jquery-3.3.1.min.js"></script>
+	<script src="js/jquery.mask.min.js"></script>
+</body>
+</html>

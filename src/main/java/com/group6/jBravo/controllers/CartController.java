@@ -1,5 +1,6 @@
 package com.group6.jBravo.controllers;
 
+import com.group6.jBravo.models.PayInfo;
 import com.group6.jBravo.models.ThankYouInfo;
 import com.group6.jBravo.services.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,12 +66,29 @@ public class CartController {
         return ("redirect:cart.html");
     }
 
-    @PostMapping("/thank-you.html")
-    public String placeOrderThankyou(@ModelAttribute ThankYouInfo thankYouInfo, Model model) {
-        System.out.println("in place order thank-you");
+    @PostMapping("thank-you.html")
+    public String thankYouPage(@ModelAttribute ThankYouInfo thankYouInfo, Model model) {
+        System.out.println("in thank-you");
+        model.addAttribute("thankYouInfo", thankYouInfo);
+        System.out.println("comment name entered = " + thankYouInfo.getFname() + " " + thankYouInfo.getLname());
+        return "thank-you";
+    }
+
+    @PostMapping("payment.html")
+    public String paymentPage(@ModelAttribute ThankYouInfo thankYouInfo, Model model) {
+        System.out.println("in payment");
         model.addAttribute("thankYouInfo", thankYouInfo);
         System.out.println("comment name entered = " + thankYouInfo.getFname() + " " + thankYouInfo.getLname());
         System.out.println("order name entered = " + thankYouInfo.getFirstname() + " " + thankYouInfo.getLastname());
+        return "payment.html";
+    }
+
+    @PostMapping("/pay-thank-you.html")
+    public String placeOrderThankyou(@ModelAttribute PayInfo payInfo, Model model) {
+        System.out.println("in place order thank-you");
+        model.addAttribute("payInfo", payInfo);
+        System.out.println("pay name entered = " + payInfo.getCardholder() );
+        System.out.println("pay card entered = " + payInfo.getCardnumber() );
         cartService.clearUserCart();
         return "thank-you";
     }

@@ -21,7 +21,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="inner_checkout ">
-                                <form method="post" id="checkoutform" action="#" th:action="@{/thank-you.html}" th:object="${thankYouInfo}">
+                                <form method="post" id="checkoutform" action="#" th:action="@{/payment.html}" th:object="${thankYouInfo}">
                                     <div class="left_cnt col-lg-8 col-md-7 col-sm-12 col-xs-12">
                                         <h2 class="title">Delivery Address</h2>
 
@@ -78,80 +78,6 @@
                                             <div class="cart_list">
                                                 <ul class="inner_cartlist" id="your_order_items_list">
                                                     <!--   This section contains the dynamically generated menu content  -->
-
-<!--                                                    <li>-->
-<!--                                                        <div class="Order_number">-->
-<!--                                                            <div class="Order_names">-->
-<!--                                                                <span class="O_name">1x Woah Mama Pizza</span>-->
-<!--                                                                <span class="O_type">Extra Large</span>-->
-
-<!--                                                            </div>-->
-<!--                                                            <div class="Order_price">-->
-<!--                                                                <span class="O_price">$12</span>-->
-<!--                                                            </div>-->
-<!--                                                        </div>-->
-<!--                                                    </li>-->
-<!--                                                    <li>-->
-<!--                                                        <div class="Order_number">-->
-<!--                                                            <div class="Order_names">-->
-<!--                                                                <span class="O_name">1x Woah Mama Pizza</span>-->
-<!--                                                                <span class="O_type">Extra Large</span>-->
-
-<!--                                                            </div>-->
-<!--                                                            <div class="Order_price">-->
-<!--                                                                <span class="O_price">$12</span>-->
-<!--                                                            </div>-->
-<!--                                                        </div>-->
-<!--                                                    </li>-->
-<!--                                                    <li>-->
-<!--                                                        <div class="Order_number">-->
-<!--                                                            <div class="Order_names">-->
-<!--                                                                <span class="O_name">1x Woah Mama Pizza</span>-->
-<!--                                                                <span class="O_type">Extra Large</span>-->
-
-<!--                                                            </div>-->
-<!--                                                            <div class="Order_price">-->
-<!--                                                                <span class="O_price">$12</span>-->
-<!--                                                            </div>-->
-<!--                                                        </div>-->
-<!--                                                    </li>-->
-<!--                                                    <li>-->
-<!--                                                        <div class="Order_number">-->
-<!--                                                            <div class="Order_names">-->
-<!--                                                                <span class="O_name">1x Woah Mama Pizza</span>-->
-<!--                                                                <span class="O_type">Extra Large</span>-->
-
-<!--                                                            </div>-->
-<!--                                                            <div class="Order_price">-->
-<!--                                                                <span class="O_price">$12</span>-->
-<!--                                                            </div>-->
-<!--                                                        </div>-->
-<!--                                                    </li>-->
-<!--                                                    <li>-->
-<!--                                                        <div class="Order_number">-->
-<!--                                                            <div class="Order_names">-->
-<!--                                                                <span class="O_name">1x Woah Mama Pizza</span>-->
-<!--                                                                <span class="O_type">Extra Large</span>-->
-
-<!--                                                            </div>-->
-<!--                                                            <div class="Order_price">-->
-<!--                                                                <span class="O_price">$12</span>-->
-<!--                                                            </div>-->
-<!--                                                        </div>-->
-<!--                                                    </li>-->
-
-<!--                                                    <li>-->
-<!--                                                        <div class="Order_number">-->
-<!--                                                            <div class="Order_names">-->
-<!--                                                                <span class="O_name">1x Woah Mama Pizza</span>-->
-<!--                                                                <span class="O_type">Extra Large</span>-->
-
-<!--                                                            </div>-->
-<!--                                                            <div class="Order_price">-->
-<!--                                                                <span class="O_price">$12</span>-->
-<!--                                                            </div>-->
-<!--                                                        </div>-->
-<!--                                                    </li>-->
                                                 </ul>
                                             </div>
                                             <div class="totle_Oamount">
@@ -169,7 +95,7 @@
                                                 </div>
                                                 <ul>
                                                     <li>
-                                                        <button type="submit" class="checkout-btn red_btn trans hvr-float-shadow" name="checkout">Place Order</button>
+                                                        <button type="submit" class="checkout-btn red_btn trans hvr-float-shadow" name="checkout">Pay</button>
                                                     </li>
                                                 </ul>
                                             </div>
