@@ -13,7 +13,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
+import java.nio.ByteBuffer;
+import java.security.SecureRandom;
 import java.sql.*;
+import java.util.Date;
 
 @Configuration
 @EnableWebSecurity
@@ -78,13 +81,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	DataSource dataSource;
 
+	@Autowired
+	PasswordEncoder passwordEncoder;
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
 				.antMatchers("/", "/home","/images/**", "/css/**", "/js/**", "/fonts/**",
 						"/about.html", "/contactus.html","/questions.html","/submenu.html",
-						"/terms_conditions.html", "/thank-you.html", "/index.html").permitAll()
+						"/terms_conditions.html", "/thank-you.html", "/index.html", "/registerlogin").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
@@ -120,6 +126,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						System.out.println("manager user added successfully");
 					} else {
 						System.out.println("Error: manager user add failed");
+					}
+					System.out.println("bcrypt of longpassword ='" + passwordEncoder.encode("longpassword")+ "'");
+					String ADD_USER_TO_USERS_SQL = ADD_USER_TO_USERS_PREFIX_SQL + "test@test" +
+							QUOTE_COMMAN_QUOTE_SEPARATOR + passwordEncoder.encode("longpassword") + USER_ENABLED_AND_END;
+					if (executeSQL(dataSource, ADD_USER_TO_USERS_SQL)) {
+						System.out.println("test user added successfully");
+					} else {
+						System.out.println("Error: test user add failed");
 					}
 				} else {
 					System.out.println("Users table not created");
@@ -196,7 +210,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		Date date = new Date();
+		long timeMilli = date.getTime();
+		ByteBuffer buffer = ByteBuffer.allocate(Long.BYTES);
+		buffer.putLong(timeMilli);
+
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(BCryptPasswordEncoder.BCryptVersion.$2Y, 12,new SecureRandom(buffer.array()));
+//		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(BCryptPasswordEncoder.BCryptVersion.$2Y, 12);
+//		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		return passwordEncoder;
 	}
 

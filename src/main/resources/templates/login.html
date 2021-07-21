@@ -82,14 +82,19 @@
                                     <div class="login_box">
                                         <h2 class="title">Create New Account</h2>
                                         <h4 class="create_ac">Create your Account</h4>
-                                        <form method="post" id="registrationform" action="/thank-you.html">
+
+                                        <form th:action="@{/registerlogin}" id="registrationform"  method="post" th:object="${userInfo}">
                                             <ul>
-                                                <li>
-                                                    <label for="EmailAddress">Email Address</label>
-                                                    <input class="form-control" name="registeremail" title="Email Address" type="email">
+                                                <label for="EmailAddress">Email Address</label>
+                                                <input class="form-control" id="NewEmailAddress" name="username" title="Email Address" type="email">
                                                 </li>
                                                 <li>
-                                                    <button type="submit" class="register-btn red_btn trans squre-btn hvr-ripple-out" name="Sign-up">Sign-up</button>
+                                                    <label for="Password">Password</label>
+                                                    <input class="form-control" title="Password" id="newPassword" name="password" type="password">
+                                                </li>
+
+                                                <li>
+                                                    <button type="submit" class="register-btn red_btn trans squre-btn hvr-ripple-out" name="Sign-up" value="Signup">Sign-up</button>
                                                 </li>
                                             </ul>
                                         </form>
